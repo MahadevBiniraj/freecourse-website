@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 _buildNavBar(context),
-                const HeroSection(),
+                HeroSection(scrollOffset: _scrollOffset),
                 const PartnersSection(),
                 const CoursesSection(),
                 const FeatureSection(),
