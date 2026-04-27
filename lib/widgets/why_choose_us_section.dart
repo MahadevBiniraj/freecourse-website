@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'scroll_appear.dart';
+import '../theme.dart';
 
 class WhyChooseUsSection extends StatelessWidget {
   const WhyChooseUsSection({super.key});
@@ -12,73 +13,101 @@ class WhyChooseUsSection extends StatelessWidget {
 
     final reasons = [
       {
-        'icon': Icons.person_outline_rounded,
-        'title': 'Expert Mentors',
-        'desc': 'Learn from industry professionals who have been in your shoes.',
-        'color': Colors.blue,
+        'id': '1',
+        'image': 'assets/why/expert_team.png',
+        'title': 'Expert team',
+        'desc': 'Our team comprises individuals who are passionate about teaching and tech.',
+        'color': AppColors.neonPurple,
       },
       {
-        'icon': Icons.work_outline_rounded,
-        'title': 'Real Jobs',
-        'desc': 'Get hired by top tech companies around the world.',
-        'color': Colors.amber,
+        'id': '2',
+        'image': 'assets/why/practical.png',
+        'title': 'Practical',
+        'desc': 'We focus on practical hands-on learning by implementing concepts.',
+        'color': AppColors.neonTeal,
       },
       {
-        'icon': Icons.groups_outlined,
-        'title': 'Community',
-        'desc': 'Join a supportive community of learners and alumni.',
-        'color': Colors.purple,
+        'id': '3',
+        'image': 'assets/why/results_driven.png',
+        'title': 'Results-Driven',
+        'desc': 'We\'re committed to delivering measurable results for every student.',
+        'color': AppColors.neonBlue,
       },
       {
-        'icon': Icons.forum_outlined,
-        'title': 'Mentorship',
-        'desc': 'Get 1-on-1 guidance from experts to accelerate your career.',
-        'color': Colors.green,
+        'id': '4',
+        'image': 'assets/why/technology.png',
+        'title': 'Technology',
+        'desc': 'We stay up-to-date with the latest technologies to provide solutions.',
+        'color': AppColors.neonYellow,
       },
     ];
 
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 24 : screenWidth * 0.1,
-        vertical: 120,
+        vertical: 140,
       ),
-      color: Colors.black,
+      decoration: const BoxDecoration(color: Colors.black),
       child: Column(
         children: [
           ScrollAppear(
             child: Column(
               children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(100),
+                    border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: Text(
+                    "WHY CHOOSE US",
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
                 const Text(
-                  "Why choose PortfolioBuilders?",
+                  "Why choose Portfolio Builders?",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
                     color: Colors.white,
-                    letterSpacing: -0.5,
+                    letterSpacing: -1,
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 80),
+          const SizedBox(height: 100),
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: isMobile ? 1 : 4,
-              crossAxisSpacing: 24,
-              mainAxisSpacing: 24,
-              childAspectRatio: isMobile ? 1.5 : 0.8,
+              crossAxisSpacing: 32,
+              mainAxisSpacing: 32,
+              childAspectRatio: isMobile ? 0.9 : 0.72,
             ),
             itemCount: reasons.length,
             itemBuilder: (context, index) {
               final reason = reasons[index];
               return ScrollAppear(
                 delay: (index * 150).ms,
-                scale: 0.9,
+                scale: 0.95,
                 child: _WhyCard(
-                  icon: reason['icon'] as IconData,
+                  id: reason['id'] as String,
+                  image: reason['image'] as String,
                   title: reason['title'] as String,
                   desc: reason['desc'] as String,
                   color: reason['color'] as Color,
@@ -93,13 +122,15 @@ class WhyChooseUsSection extends StatelessWidget {
 }
 
 class _WhyCard extends StatelessWidget {
-  final IconData icon;
+  final String id;
+  final String image;
   final String title;
   final String desc;
   final Color color;
 
   const _WhyCard({
-    required this.icon,
+    required this.id,
+    required this.image,
     required this.title,
     required this.desc,
     required this.color,
@@ -108,39 +139,73 @@ class _WhyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(32),
-      decoration: BoxDecoration(
-        color: const Color(0xFF111111),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+      padding: const EdgeInsets.all(28),
+      decoration: AppStyles.glassBox(
+        opacity: 0.05,
+      ).copyWith(
+        boxShadow: AppStyles.neonGlow(color, opacity: 0.05),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.1),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(icon, color: color, size: 24),
+          Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+                alignment: Alignment.center,
+                child: Text(
+                  id,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                    letterSpacing: -0.5,
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 24),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+          const SizedBox(height: 32),
+          Expanded(
+            child: Center(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: image.startsWith('http')
+                  ? Image.network(
+                      image,
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) =>
+                          const Icon(Icons.broken_image, color: Colors.white24, size: 48),
+                    )
+                  : Image.asset(
+                      image,
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) =>
+                          const Icon(Icons.image_outlined, color: Colors.white24, size: 48),
+                    ),
+              ),
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 32),
           Text(
             desc,
             style: TextStyle(
-              fontSize: 15,
-              color: Colors.white54,
-              height: 1.5,
+              fontSize: 14,
+              color: Colors.white.withValues(alpha: 0.5),
+              height: 1.6,
             ),
           ),
         ],

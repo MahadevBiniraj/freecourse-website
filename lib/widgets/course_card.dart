@@ -103,21 +103,26 @@ class _CourseCardState extends State<CourseCard> with SingleTickerProviderStateM
                           Positioned(
                             top: 20,
                             right: 20,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                              decoration: BoxDecoration(
-                                color: Colors.black.withValues(alpha: 0.6),
-                                borderRadius: BorderRadius.circular(100),
-                                border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
-                                backdropFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                              ),
-                              child: Text(
-                                widget.tag,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 0.5,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withValues(alpha: 0.6),
+                                    borderRadius: BorderRadius.circular(100),
+                                    border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                                  ),
+                                  child: Text(
+                                    widget.tag,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

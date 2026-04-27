@@ -15,22 +15,24 @@ class FeatureSection extends StatelessWidget {
       {
         'id': '01',
         'title': 'Intensive Training',
-        'desc': 'Our programs are designed to be challenging and fast-paced.'
+        'desc': 'Our programs are designed to be challenging and fast-paced.',
       },
       {
         'id': '02',
         'title': 'Project-Based',
-        'desc': 'Build a portfolio of real-world projects that impress employers.'
+        'desc':
+            'Build a portfolio of real-world projects that impress employers.',
       },
       {
         'id': '03',
         'title': 'Critical Thinking',
-        'desc': 'Learn to solve complex problems and think like a professional.'
+        'desc':
+            'Learn to solve complex problems and think like a professional.',
       },
       {
         'id': '04',
         'title': 'Hard Skills',
-        'desc': 'Master the tools and technologies used by top companies.'
+        'desc': 'Master the tools and technologies used by top companies.',
       },
     ];
 
@@ -56,13 +58,19 @@ class FeatureSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 80),
-          ...features.asMap().entries.map((e) => _buildFeatureItem(e.value, isMobile, e.key)),
+          ...features.asMap().entries.map(
+            (e) => _buildFeatureItem(e.value, isMobile, e.key),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildFeatureItem(Map<String, String> feature, bool isMobile, int index) {
+  Widget _buildFeatureItem(
+    Map<String, String> feature,
+    bool isMobile,
+    int index,
+  ) {
     return ScrollAppear(
       delay: (index * 150).ms,
       child: Padding(

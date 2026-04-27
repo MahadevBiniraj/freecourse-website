@@ -307,25 +307,6 @@ class HeroSection extends StatelessWidget {
   // Old background method removed as it's replaced by PremiumHeroBackground
 }
 
-class _Glow extends StatelessWidget {
-  final Color color;
-  final double size;
-  const _Glow({required this.color, required this.size});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: RadialGradient(
-          colors: [color, color.withValues(alpha: 0)],
-        ),
-      ),
-    );
-  }
-}
 
 class _GlassPanel extends StatelessWidget {
   final double width;
