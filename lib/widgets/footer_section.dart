@@ -45,7 +45,7 @@ class FooterSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "© 2026 OpenBootcamp. The future of coding education.",
+                "© 2026 PortfolioBuilders. The future of coding education.",
                 style: TextStyle(color: Colors.white38, fontSize: 13),
               ),
               if (!isMobile)
@@ -79,7 +79,7 @@ class FooterSection extends StatelessWidget {
             ),
             const SizedBox(width: 16),
             const Text(
-              "OpenBootcamp",
+              "PortfolioBuilders",
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w900,

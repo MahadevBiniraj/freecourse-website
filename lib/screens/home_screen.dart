@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(width: 12),
               const Text(
-                "OpenBootcamp",
+                "PortfolioBuilders",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,

@@ -12,7 +12,7 @@ class PortfolioBuildersApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'OpenBootcamp | Free Courses',
+      title: 'PortfolioBuilders | Free Courses',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       home: const HomeScreen(),

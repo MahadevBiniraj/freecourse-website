@@ -11,10 +11,10 @@ class FAQSection extends StatelessWidget {
     final isMobile = screenWidth < 800;
 
     final faqs = [
-      {'q': 'What is OpenBootcamp?', 'a': 'OpenBootcamp is an online platform that provides high-quality tech education for free.'},
+      {'q': 'What is PortfolioBuilders?', 'a': 'PortfolioBuilders is an online platform that provides high-quality tech education for free.'},
       {'q': 'Is it free?', 'a': 'Yes, all our courses are 100% free with no hidden charges.'},
       {'q': 'Who is it for?', 'a': 'Anyone looking to start or advance their career in tech, from beginners to experienced pros.'},
-      {'q': 'How long does it take?', 'a': 'Most bootcamps range from 10 to 16 weeks depending on the intensity and topic.'},
+      {'q': 'How long does it take?', 'a': 'Most courses range from 10 to 16 weeks depending on the intensity and topic.'},
       {'q': 'Do I need prior experience?', 'a': 'No prior experience is required for our foundational courses. We start from the basics.'},
     ];
 

@@ -63,7 +63,7 @@ class CoursesSection extends StatelessWidget {
             child: Column(
               children: [
                 const Text(
-                  "Our bootcamps",
+                  "Our Courses",
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,

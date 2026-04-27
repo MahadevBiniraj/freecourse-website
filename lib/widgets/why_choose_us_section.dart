@@ -49,7 +49,7 @@ class WhyChooseUsSection extends StatelessWidget {
             child: Column(
               children: [
                 const Text(
-                  "Why choose OpenBootcamp?",
+                  "Why choose PortfolioBuilders?",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40,

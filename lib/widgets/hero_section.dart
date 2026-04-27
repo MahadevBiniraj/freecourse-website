@@ -41,7 +41,17 @@ class HeroSection extends StatelessWidget {
           isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         Text(
-          "Up-skill and accelerate your\nCareer in tech",
+          "Limited seats • Open for students nationwide".toUpperCase(),
+          style: const TextStyle(
+            color: Color(0xFF2D1B69),
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.5,
+            fontSize: 12,
+          ),
+        ).animate().fadeIn(duration: 600.ms),
+        const SizedBox(height: 16),
+        Text(
+          "₹10 Crore Scholarship Program — Learn Skills for Free",
           textAlign: isMobile ? TextAlign.center : TextAlign.left,
           style: Theme.of(context).textTheme.displayLarge?.copyWith(
                 height: 1.1,
@@ -51,7 +61,7 @@ class HeroSection extends StatelessWidget {
         ).animate().fadeIn(duration: 800.ms).slideY(begin: 0.2, end: 0),
         const SizedBox(height: 24),
         Text(
-          "Join 10,000+ students learning the most in-demand skills from industry experts.",
+          "Portfolio Builders is offering free access to premium tech courses for students across India. Apply now and start building your future.",
           textAlign: isMobile ? TextAlign.center : TextAlign.left,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: Colors.black54,
@@ -69,7 +79,7 @@ class HeroSection extends StatelessWidget {
       children: [
         _HoverButton(
           onPressed: () {},
-          child: const Text("Get started"),
+          child: const Text("Apply Now"),
         ),
       ],
     ).animate().fadeIn(delay: 400.ms).scale(begin: const Offset(0.9, 0.9));
