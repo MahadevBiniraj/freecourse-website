@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'course_card.dart';
@@ -14,94 +15,217 @@ class CoursesSection extends StatelessWidget {
 
     final courses = [
       {
-        'title': 'Product Design',
-        'desc': 'Master UX/UI design and build products that users love.',
+        'title': 'UI/UX Design',
+        'desc': 'Master modern design principles and build stunning interfaces.',
         'icon': Icons.palette_outlined,
-        'color': Colors.redAccent,
+        'tag': 'Beginner to Advanced',
       },
       {
-        'title': 'Data Science',
-        'desc': 'Learn to analyze data and build machine learning models.',
-        'icon': Icons.insights_rounded,
-        'color': Colors.blueAccent,
+        'title': 'Full Stack Web Dev',
+        'desc': 'Build powerful web applications from frontend to backend.',
+        'icon': Icons.code_rounded,
+        'tag': 'Job-ready',
       },
       {
-        'title': 'Full Stack',
-        'desc': 'Become a professional web developer from scratch.',
-        'icon': Icons.layers_outlined,
-        'color': Colors.white70,
+        'title': 'Mobile App Dev (Flutter)',
+        'desc': 'Create beautiful cross-platform apps with Flutter.',
+        'icon': Icons.smartphone_rounded,
+        'tag': 'Job-ready',
       },
       {
-        'title': 'Cybersecurity',
-        'desc': 'Protect systems and networks from digital attacks.',
-        'icon': Icons.shield_outlined,
-        'color': Colors.greenAccent,
+        'title': 'Game Development',
+        'desc': 'Bring your imagination to life with interactive game mechanics.',
+        'icon': Icons.sports_esports_outlined,
+        'tag': 'Beginner to Advanced',
       },
       {
-        'title': 'AI & ML',
-        'desc': 'Deep dive into artificial intelligence and neural networks.',
-        'icon': Icons.psychology_outlined,
-        'color': Colors.redAccent,
+        'title': 'Python Django',
+        'desc': 'Build scalable and secure backends with Python.',
+        'icon': Icons.terminal_rounded,
+        'tag': 'Advanced',
       },
       {
-        'title': 'Digital Marketing',
-        'desc': 'Grow brands and reach customers in the digital age.',
-        'icon': Icons.trending_up_rounded,
-        'color': Colors.purpleAccent,
+        'title': 'Project Management',
+        'desc': 'Lead teams and deliver successful tech products.',
+        'icon': Icons.assignment_turned_in_outlined,
+        'tag': 'Career-focused',
       },
     ];
 
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 24 : screenWidth * 0.1,
-        vertical: 100,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Colors.black,
       ),
-      color: AppColors.background,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Stack(
         children: [
-          ScrollAppear(
+          // 1. Premium Background
+          Positioned.fill(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF000000),
+                    Color(0xFF020B1A),
+                    Color(0xFF000000),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          
+          // 2. Faint Grid Pattern
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.05,
+              child: CustomPaint(
+                painter: _GridPainter(),
+              ),
+            ),
+          ),
+
+          // 3. Subtle Radial Glow
+          Positioned(
+            top: 200,
+            left: screenWidth * 0.2,
+            child: Container(
+              width: 800,
+              height: 800,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    AppColors.accent.withValues(alpha: 0.1),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+          // 4. Content
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? 24 : screenWidth * 0.1,
+              vertical: 120,
+            ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  "Our Courses",
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.white,
-                    letterSpacing: -0.5,
+                ScrollAppear(
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(100),
+                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+                        ),
+                        child: Text(
+                          "CAREER PATHS",
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 2,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 24),
+                      Text(
+                        "Explore In-Demand Courses",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: isMobile ? 32 : 56,
+                          fontWeight: FontWeight.w900,
+                          color: Colors.white,
+                          letterSpacing: -1.5,
+                          height: 1.1,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: 600,
+                        child: Text(
+                          "Choose your path and start building real-world skills today. Our curriculum is designed by industry experts to get you job-ready.",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: isMobile ? 16 : 18,
+                            color: Colors.white.withValues(alpha: 0.5),
+                            height: 1.6,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+                ),
+                const SizedBox(height: 80),
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: isMobile ? 1 : 3,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 24,
+                    childAspectRatio: isMobile ? 1.1 : 0.82,
+                  ),
+                  itemCount: courses.length,
+                  itemBuilder: (context, index) {
+                    final course = courses[index];
+                    return ScrollAppear(
+                      delay: (index * 100).ms,
+                      begin: const Offset(0, 0.2),
+                      child: CourseCard(
+                        title: course['title'] as String,
+                        desc: course['desc'] as String,
+                        icon: course['icon'] as IconData,
+                        iconColor: AppColors.primary,
+                        tag: course['tag'] as String,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 64),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: isMobile ? 1 : 3,
-              crossAxisSpacing: 32,
-              mainAxisSpacing: 32,
-              childAspectRatio: isMobile ? 1.2 : 0.85,
+          
+          // Noise Overlay
+          Positioned.fill(
+            child: Opacity(
+              opacity: 0.03,
+              child: Image.network(
+                'https://grainy-gradients.vercel.app/noise.svg',
+                repeat: ImageRepeat.repeat,
+                fit: BoxFit.none,
+              ),
             ),
-            itemCount: courses.length,
-            itemBuilder: (context, index) {
-              final course = courses[index];
-              return ScrollAppear(
-                delay: (index * 150).ms,
-                begin: const Offset(0, 0.1),
-                child: CourseCard(
-                  title: course['title'] as String,
-                  desc: course['desc'] as String,
-                  icon: course['icon'] as IconData,
-                  iconColor: course['color'] as Color,
-                ),
-              );
-            },
           ),
         ],
       ),
     );
   }
+}
+
+class _GridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.1)
+      ..strokeWidth = 0.5;
+
+    const spacing = 60.0;
+
+    for (double i = 0; i < size.width; i += spacing) {
+      canvas.drawLine(Offset(i, 0), Offset(i, size.height), paint);
+    }
+    for (double i = 0; i < size.height; i += spacing) {
+      canvas.drawLine(Offset(0, i), Offset(size.width, i), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

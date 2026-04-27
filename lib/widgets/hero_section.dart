@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'premium_hero_background.dart';
 import '../theme.dart';
 
 
@@ -18,7 +19,9 @@ class HeroSection extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          _buildPremiumBackground(screenWidth),
+          Positioned.fill(
+            child: PremiumHeroBackground(scrollOffset: scrollOffset),
+          ),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: isMobile ? 24 : screenWidth * 0.08,
@@ -133,7 +136,7 @@ class HeroSection extends StatelessWidget {
           style: TextStyle(
             fontSize: isMobile ? 36 : 72,
             fontWeight: FontWeight.w900,
-            color: Colors.white.withValues(alpha: 0.9),
+            color: Colors.white.withValues(alpha: 0.7),
             height: 1.1,
             letterSpacing: -1.5,
           ),
@@ -144,13 +147,13 @@ class HeroSection extends StatelessWidget {
 
   Widget _buildSubheadline(bool isMobile) {
     return SizedBox(
-      width: 600,
+      width: 700,
       child: Text(
-        "Learn industry-ready tech skills for free and build your future. Join the next generation of top-tier Indian developers.",
+        "Break into tech without paying a rupee. Learn real-world skills, build projects, and get job-ready with top mentors.",
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: isMobile ? 18 : 22,
-          color: Colors.white70,
+          color: Colors.white.withValues(alpha: 0.6),
           height: 1.6,
           fontWeight: FontWeight.w500,
         ),
@@ -165,7 +168,7 @@ class HeroSection extends StatelessWidget {
         _HoverButton(
           onPressed: () {},
           isPrimary: true,
-          child: const Text("Apply Now"),
+          child: const Text("Apply for Scholarship"),
         ),
         const SizedBox(width: 24),
         _HoverButton(
@@ -174,7 +177,7 @@ class HeroSection extends StatelessWidget {
           child: const Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("Explore Courses"),
+              Text("Start Learning Free"),
               SizedBox(width: 8),
               Icon(Icons.arrow_forward_rounded, size: 18),
             ],
@@ -301,42 +304,7 @@ class HeroSection extends StatelessWidget {
     );
   }
 
-  Widget _buildPremiumBackground(double width) {
-    return Positioned.fill(
-      child: Stack(
-        children: [
-          Container(color: const Color(0xFF000000)),
-          // Mesh Gradients
-          Positioned(
-            top: -200,
-            right: -100,
-            child: _Glow(color: const Color(0xFF1A2B4C).withValues(alpha: 0.3), size: 800),
-          ),
-          Positioned(
-            top: 400,
-            left: -200,
-            child: _Glow(color: const Color(0xFF00FF85).withValues(alpha: 0.05), size: 700),
-          ),
-          Positioned(
-            bottom: -300,
-            right: 100,
-            child: _Glow(color: const Color(0xFF1A2B4C).withValues(alpha: 0.2), size: 900),
-          ),
-          // Noise
-          Positioned.fill(
-            child: Opacity(
-              opacity: 0.03,
-              child: Image.network(
-                'https://grainy-gradients.vercel.app/noise.svg',
-                repeat: ImageRepeat.repeat,
-                fit: BoxFit.none,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Old background method removed as it's replaced by PremiumHeroBackground
 }
 
 class _Glow extends StatelessWidget {
