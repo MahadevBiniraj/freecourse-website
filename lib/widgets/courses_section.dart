@@ -17,37 +17,37 @@ class CoursesSection extends StatelessWidget {
       {
         'title': 'UI/UX Design',
         'desc': 'Master modern design principles and build stunning interfaces.',
-        'icon': Icons.palette_outlined,
-        'tag': 'Beginner to Advanced',
+        'image': 'assets/courses/ui_ux.png',
+        'tag': 'Beginner Friendly',
       },
       {
         'title': 'Full Stack Web Dev',
         'desc': 'Build powerful web applications from frontend to backend.',
-        'icon': Icons.code_rounded,
+        'image': 'assets/courses/full_stack.png',
         'tag': 'Job-ready',
       },
       {
         'title': 'Mobile App Dev (Flutter)',
         'desc': 'Create beautiful cross-platform apps with Flutter.',
-        'icon': Icons.smartphone_rounded,
+        'image': 'assets/courses/mobile_dev.png',
         'tag': 'Job-ready',
       },
       {
         'title': 'Game Development',
-        'desc': 'Bring your imagination to life with interactive game mechanics.',
-        'icon': Icons.sports_esports_outlined,
-        'tag': 'Beginner to Advanced',
+        'desc': 'Bring your imagination to life with interactive mechanics.',
+        'image': 'assets/courses/game_dev.png',
+        'tag': 'Project-based',
       },
       {
         'title': 'Python Django',
         'desc': 'Build scalable and secure backends with Python.',
-        'icon': Icons.terminal_rounded,
+        'image': 'assets/courses/python_django.png',
         'tag': 'Advanced',
       },
       {
         'title': 'Project Management',
         'desc': 'Lead teams and deliver successful tech products.',
-        'icon': Icons.assignment_turned_in_outlined,
+        'image': 'assets/courses/project_management.png',
         'tag': 'Career-focused',
       },
     ];
@@ -89,15 +89,15 @@ class CoursesSection extends StatelessWidget {
           // 3. Subtle Radial Glow
           Positioned(
             top: 200,
-            left: screenWidth * 0.2,
+            right: -200,
             child: Container(
-              width: 800,
-              height: 800,
+              width: 1000,
+              height: 1000,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppColors.accent.withValues(alpha: 0.1),
+                    AppColors.accent.withValues(alpha: 0.15),
                     Colors.transparent,
                   ],
                 ),
@@ -109,7 +109,7 @@ class CoursesSection extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: isMobile ? 24 : screenWidth * 0.1,
-              vertical: 120,
+              vertical: 140,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -125,7 +125,7 @@ class CoursesSection extends StatelessWidget {
                           border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
                         ),
                         child: Text(
-                          "CAREER PATHS",
+                          "LEARN FROM THE BEST",
                           style: TextStyle(
                             color: AppColors.primary,
                             fontSize: 12,
@@ -139,50 +139,50 @@ class CoursesSection extends StatelessWidget {
                         "Explore In-Demand Courses",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: isMobile ? 32 : 56,
+                          fontSize: isMobile ? 36 : 64,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,
-                          letterSpacing: -1.5,
+                          letterSpacing: -2,
                           height: 1.1,
                         ),
                       ),
                       const SizedBox(height: 16),
                       SizedBox(
-                        width: 600,
+                        width: 700,
                         child: Text(
-                          "Choose your path and start building real-world skills today. Our curriculum is designed by industry experts to get you job-ready.",
+                          "Choose your path and start building real-world skills today. Our curriculum is designed by industry experts to help you break into tech.",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: isMobile ? 16 : 18,
+                            fontSize: isMobile ? 16 : 20,
                             color: Colors.white.withValues(alpha: 0.5),
                             height: 1.6,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 80),
+                const SizedBox(height: 100),
                 GridView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: isMobile ? 1 : 3,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 24,
-                    childAspectRatio: isMobile ? 1.1 : 0.82,
+                    crossAxisSpacing: 32,
+                    mainAxisSpacing: 32,
+                    childAspectRatio: isMobile ? 0.9 : 0.75,
                   ),
                   itemCount: courses.length,
                   itemBuilder: (context, index) {
                     final course = courses[index];
                     return ScrollAppear(
-                      delay: (index * 100).ms,
+                      delay: (index * 150).ms,
                       begin: const Offset(0, 0.2),
                       child: CourseCard(
                         title: course['title'] as String,
                         desc: course['desc'] as String,
-                        icon: course['icon'] as IconData,
-                        iconColor: AppColors.primary,
+                        imagePath: course['image'] as String,
                         tag: course['tag'] as String,
                       ),
                     );
@@ -195,7 +195,7 @@ class CoursesSection extends StatelessWidget {
           // Noise Overlay
           Positioned.fill(
             child: Opacity(
-              opacity: 0.03,
+              opacity: 0.04,
               child: Image.network(
                 'https://grainy-gradients.vercel.app/noise.svg',
                 repeat: ImageRepeat.repeat,
@@ -216,7 +216,7 @@ class _GridPainter extends CustomPainter {
       ..color = Colors.white.withValues(alpha: 0.1)
       ..strokeWidth = 0.5;
 
-    const spacing = 60.0;
+    const spacing = 80.0;
 
     for (double i = 0; i < size.width; i += spacing) {
       canvas.drawLine(Offset(i, 0), Offset(i, size.height), paint);
