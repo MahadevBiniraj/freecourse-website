@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../theme.dart';
 
+
 class HeroSection extends StatelessWidget {
   final double scrollOffset;
   const HeroSection({super.key, required this.scrollOffset});
@@ -15,69 +16,316 @@ class HeroSection extends StatelessWidget {
       width: double.infinity,
       clipBehavior: Clip.none,
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
-          _buildBackground(screenWidth),
+          _buildPremiumBackground(screenWidth),
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: isMobile ? 24 : screenWidth * 0.1,
+              horizontal: isMobile ? 24 : screenWidth * 0.08,
               vertical: isMobile ? 80 : 160,
             ),
-            child: isMobile
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _buildContent(context, isMobile: true),
-                      const SizedBox(height: 80),
-                      _buildImage(isMobile: true),
-                    ],
-                  )
-                : Row(
-                    children: [
-                      Expanded(flex: 3, child: _buildContent(context)),
-                      const SizedBox(width: 80),
-                      Expanded(flex: 2, child: _buildImage()),
-                    ],
-                  ),
+            child: Column(
+              children: [
+                // Top Badge
+                _buildBadge().animate().fadeIn(duration: 600.ms).slideY(begin: 0.2, end: 0),
+                const SizedBox(height: 32),
+                
+                // Headline
+                _buildHeadline(context, isMobile)
+                    .animate()
+                    .fadeIn(delay: 200.ms, duration: 800.ms)
+                    .slideY(begin: 0.1, end: 0),
+                
+                const SizedBox(height: 32),
+                
+                // Subheadline
+                _buildSubheadline(isMobile)
+                    .animate()
+                    .fadeIn(delay: 400.ms, duration: 800.ms),
+                
+                const SizedBox(height: 56),
+                
+                // CTAs
+                _buildCTAs(isMobile)
+                    .animate()
+                    .fadeIn(delay: 600.ms, duration: 800.ms)
+                    .scale(begin: const Offset(0.95, 0.95), curve: Curves.easeOutBack),
+                
+                const SizedBox(height: 100),
+                
+                // Main Visual Stack
+                _buildVisualStack(screenWidth, isMobile),
+              ],
+            ),
+          ),
+          
+          // Floating Elements (Parallax)
+          if (!isMobile) ...[
+            _buildFloatingCard(
+              top: 200 - (scrollOffset * 0.1),
+              left: screenWidth * 0.05,
+              child: const _StatusCard(
+                icon: Icons.check_circle_rounded,
+                title: "Application Approved",
+                subtitle: "Scholarship applied",
+                color: Colors.greenAccent,
+              ),
+            ),
+            _buildFloatingCard(
+              top: 400 - (scrollOffset * 0.2),
+              right: screenWidth * 0.05,
+              child: const _StatusCard(
+                icon: Icons.auto_awesome,
+                title: "10,000+ Students",
+                subtitle: "Already learning",
+                color: Colors.blueAccent,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBadge() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.stars_rounded, color: AppColors.primary, size: 16),
+          const SizedBox(width: 8),
+          const Text(
+            "INDIA'S LARGEST TECH SCHOLARSHIP",
+            style: TextStyle(
+              color: AppColors.primary,
+              fontWeight: FontWeight.w800,
+              fontSize: 11,
+              letterSpacing: 1.2,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildBackground(double width) {
-    final py = scrollOffset * 0.2;
+  Widget _buildHeadline(BuildContext context, bool isMobile) {
+    return Column(
+      children: [
+        Text(
+          "₹10 Crore",
+          style: TextStyle(
+            fontSize: isMobile ? 72 : 140,
+            fontWeight: FontWeight.w900,
+            color: Colors.white,
+            height: 0.9,
+            letterSpacing: -4,
+          ),
+        ),
+        Text(
+          "Scholarship Program",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: isMobile ? 36 : 72,
+            fontWeight: FontWeight.w900,
+            color: Colors.white.withValues(alpha: 0.9),
+            height: 1.1,
+            letterSpacing: -1.5,
+          ),
+        ),
+      ],
+    );
+  }
 
+  Widget _buildSubheadline(bool isMobile) {
+    return SizedBox(
+      width: 600,
+      child: Text(
+        "Learn industry-ready tech skills for free and build your future. Join the next generation of top-tier Indian developers.",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: isMobile ? 18 : 22,
+          color: Colors.white70,
+          height: 1.6,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCTAs(bool isMobile) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _HoverButton(
+          onPressed: () {},
+          isPrimary: true,
+          child: const Text("Apply Now"),
+        ),
+        const SizedBox(width: 24),
+        _HoverButton(
+          onPressed: () {},
+          isPrimary: false,
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("Explore Courses"),
+              SizedBox(width: 8),
+              Icon(Icons.arrow_forward_rounded, size: 18),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVisualStack(double width, bool isMobile) {
+    return Stack(
+      alignment: Alignment.center,
+      clipBehavior: Clip.none,
+      children: [
+        // Main Dashboard Mockup
+        Container(
+          width: isMobile ? width * 0.9 : 1000,
+          height: isMobile ? 300 : 550,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: Colors.white.withValues(alpha: 0.1), width: 1.5),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withValues(alpha: 0.05),
+                blurRadius: 100,
+                offset: const Offset(0, 50),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(22),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: Image.network(
+                    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color(0xFF000000).withValues(alpha: 0.9),
+                          Colors.transparent,
+                        ],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                    ),
+                  ),
+                ),
+                // Coding UI overlay
+                Positioned(
+                  left: 32,
+                  top: 32,
+                  child: _GlassPanel(
+                    width: isMobile ? 150 : 250,
+                    height: isMobile ? 100 : 150,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.redAccent, shape: BoxShape.circle)),
+                            const SizedBox(width: 8),
+                            Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.amberAccent, shape: BoxShape.circle)),
+                            const SizedBox(width: 8),
+                            Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.greenAccent, shape: BoxShape.circle)),
+                          ],
+                        ),
+                        const SizedBox(height: 24),
+                        _MockLine(width: 180),
+                        _MockLine(width: 120),
+                        _MockLine(width: 150),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ).animate().scale(begin: const Offset(0.9, 0.9), duration: 1200.ms, curve: Curves.easeOutQuart),
+        
+        // Floating Overlays
+        if (!isMobile) ...[
+          Positioned(
+            right: -40,
+            bottom: 100,
+            child: _GlassPanel(
+              width: 280,
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Your Progress", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("UI Design", style: TextStyle(color: Colors.white70, fontSize: 13)),
+                      Text("85%", style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  LinearProgressIndicator(value: 0.85, backgroundColor: Colors.white10, valueColor: const AlwaysStoppedAnimation(AppColors.primary)),
+                ],
+              ),
+            ),
+          ).animate().slideX(begin: 0.2, end: 0, delay: 800.ms),
+        ],
+      ],
+    );
+  }
+
+  Widget _buildFloatingCard({required double top, double? left, double? right, required Widget child}) {
+    return Positioned(
+      top: top,
+      left: left,
+      right: right,
+      child: child.animate(onPlay: (c) => c.repeat(reverse: true))
+          .moveY(begin: 0, end: 20, duration: 3.seconds, curve: Curves.easeInOut),
+    );
+  }
+
+  Widget _buildPremiumBackground(double width) {
     return Positioned.fill(
       child: Stack(
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFFF8FAFC), Colors.white],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-          ),
+          Container(color: const Color(0xFF000000)),
+          // Mesh Gradients
           Positioned(
-            top: -100 - py,
+            top: -200,
             right: -100,
-            child: _Blob(
-              color: const Color(0xFF6366F1).withValues(alpha: 0.15),
-              size: 500,
-            ),
+            child: _Glow(color: const Color(0xFF1A2B4C).withValues(alpha: 0.3), size: 800),
           ),
           Positioned(
-            bottom: -200 + py,
-            left: -100,
-            child: _Blob(
-              color: const Color(0xFF8B5CF6).withValues(alpha: 0.12),
-              size: 600,
-            ),
+            top: 400,
+            left: -200,
+            child: _Glow(color: const Color(0xFF00FF85).withValues(alpha: 0.05), size: 700),
           ),
+          Positioned(
+            bottom: -300,
+            right: 100,
+            child: _Glow(color: const Color(0xFF1A2B4C).withValues(alpha: 0.2), size: 900),
+          ),
+          // Noise
           Positioned.fill(
             child: Opacity(
-              opacity: 0.015,
+              opacity: 0.03,
               child: Image.network(
                 'https://grainy-gradients.vercel.app/noise.svg',
                 repeat: ImageRepeat.repeat,
@@ -89,90 +337,12 @@ class HeroSection extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildContent(BuildContext context, {bool isMobile = false}) {
-    return Column(
-      crossAxisAlignment:
-          isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Limited seats • Open for students nationwide".toUpperCase(),
-          style: const TextStyle(
-            color: Color(0xFF2D1B69),
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.5,
-            fontSize: 12,
-          ),
-        ).animate().fadeIn(duration: 800.ms).slideX(begin: -0.1, end: 0),
-        const SizedBox(height: 16),
-        Text(
-          "₹10 Crore Scholarship Program — Learn Skills for Free",
-          textAlign: isMobile ? TextAlign.center : TextAlign.left,
-          style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                height: 1.1,
-                fontSize: isMobile ? 44 : 68,
-                color: const Color(0xFF0F172A),
-                fontWeight: FontWeight.w900,
-                letterSpacing: -1.5,
-              ),
-        ).animate().fadeIn(duration: 800.ms).slideY(begin: 0.1, end: 0),
-        const SizedBox(height: 32),
-        Text(
-          "Portfolio Builders is offering free access to premium tech courses for students across India. Apply now and start building your future.",
-          textAlign: isMobile ? TextAlign.center : TextAlign.left,
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.grey.shade600,
-            height: 1.6,
-          ),
-        ).animate().fadeIn(delay: 300.ms, duration: 800.ms),
-        const SizedBox(height: 48),
-        _buildActionButtons(isMobile),
-      ],
-    );
-  }
-
-  Widget _buildActionButtons(bool isMobile) {
-    return _HoverButton(
-      onPressed: () {},
-      child: const Text("Apply Now"),
-    ).animate().fadeIn(delay: 500.ms).scale(begin: const Offset(0.95, 0.95), curve: Curves.elasticOut);
-  }
-
-  Widget _buildImage({bool isMobile = false}) {
-    return _TiltWrapper(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF2D1B69).withValues(alpha: 0.1),
-              blurRadius: 40,
-              offset: const Offset(0, 20),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: Image.network(
-            'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80',
-            fit: BoxFit.cover,
-          ),
-        ),
-      )
-          .animate(onPlay: (c) => c.repeat(reverse: true))
-          .moveY(begin: 0, end: -20, duration: 4.seconds, curve: Curves.easeInOut)
-          .animate()
-          .fadeIn(delay: 600.ms, duration: 1000.ms)
-          .scale(begin: const Offset(0.9, 0.9), duration: 1000.ms, curve: Curves.easeOutQuart),
-    );
-  }
 }
 
-class _Blob extends StatelessWidget {
+class _Glow extends StatelessWidget {
   final Color color;
   final double size;
-  const _Blob({required this.color, required this.size});
+  const _Glow({required this.color, required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -180,47 +350,96 @@ class _Blob extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: color,
         shape: BoxShape.circle,
+        gradient: RadialGradient(
+          colors: [color, color.withValues(alpha: 0)],
+        ),
       ),
-    ).animate(onPlay: (c) => c.repeat(reverse: true))
-     .moveY(begin: 0, end: 30, duration: 5.seconds, curve: Curves.easeInOut)
-     .scale(begin: const Offset(1, 1), end: const Offset(1.1, 1.1), duration: 7.seconds);
+    );
   }
 }
 
-class _TiltWrapper extends StatefulWidget {
+class _GlassPanel extends StatelessWidget {
+  final double width;
+  final double? height;
   final Widget child;
-  const _TiltWrapper({required this.child});
-
-  @override
-  State<_TiltWrapper> createState() => _TiltWrapperState();
-}
-
-class _TiltWrapperState extends State<_TiltWrapper> {
-  double x = 0;
-  double y = 0;
+  final EdgeInsets padding;
+  const _GlassPanel({required this.width, this.height, required this.child, this.padding = const EdgeInsets.all(16)});
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onHover: (e) {
-        final box = context.findRenderObject() as RenderBox;
-        final w = box.size.width;
-        final h = box.size.height;
-        setState(() {
-          x = (e.localPosition.dy - h / 2) / h;
-          y = (e.localPosition.dx - w / 2) / w;
-        });
-      },
-      onExit: (_) => setState(() { x = 0; y = 0; }),
-      child: Transform(
-        transform: Matrix4.identity()
-          ..setEntry(3, 2, 0.001)
-          ..rotateX(-x * 0.1)
-          ..rotateY(y * 0.1),
-        alignment: Alignment.center,
-        child: widget.child,
+    return Container(
+      width: width,
+      height: height,
+      padding: padding,
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withValues(alpha: 0.4), blurRadius: 20),
+        ],
+      ),
+      child: child,
+    );
+  }
+}
+
+class _MockLine extends StatelessWidget {
+  final double width;
+  const _MockLine({required this.width});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: 6,
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(4),
+      ),
+    );
+  }
+}
+
+class _StatusCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color;
+  const _StatusCard({required this.icon, required this.title, required this.subtitle, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF111111),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 30, offset: const Offset(0, 15)),
+        ],
+        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(color: color.withValues(alpha: 0.1), shape: BoxShape.circle),
+            child: Icon(icon, color: color, size: 20),
+          ),
+          const SizedBox(width: 16),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.white)),
+              Text(subtitle, style: const TextStyle(color: Colors.white54, fontSize: 12)),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -229,7 +448,8 @@ class _TiltWrapperState extends State<_TiltWrapper> {
 class _HoverButton extends StatefulWidget {
   final Widget child;
   final VoidCallback onPressed;
-  const _HoverButton({required this.child, required this.onPressed});
+  final bool isPrimary;
+  const _HoverButton({required this.child, required this.onPressed, this.isPrimary = true});
 
   @override
   State<_HoverButton> createState() => _HoverButtonState();
@@ -249,27 +469,24 @@ class _HoverButtonState extends State<_HoverButton> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            gradient: const LinearGradient(
-              colors: [Color(0xFF2D1B69), Color(0xFF4338CA)],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            boxShadow: isHovered ? [
-              BoxShadow(
-                color: const Color(0xFF2D1B69).withValues(alpha: 0.3),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-              )
+            gradient: widget.isPrimary ? const LinearGradient(
+              colors: [Color(0xFF00FF85), Color(0xFF00FFCC)],
+            ) : null,
+            color: widget.isPrimary ? null : Colors.transparent,
+            border: widget.isPrimary ? null : Border.all(color: Colors.white24),
+            boxShadow: isHovered && widget.isPrimary ? [
+              BoxShadow(color: const Color(0xFF00FF85).withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 10)),
             ] : [],
           ),
           child: ElevatedButton(
             onPressed: widget.onPressed,
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
-              foregroundColor: Colors.white,
+              foregroundColor: widget.isPrimary ? Colors.black : Colors.white,
               shadowColor: Colors.transparent,
-              padding: const EdgeInsets.symmetric(horizontal: 48, vertical: 24),
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+              textStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: -0.2),
             ),
             child: widget.child,
           ),

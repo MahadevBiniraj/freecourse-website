@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
         horizontal: isMobile ? 24 : screenWidth * 0.1,
         vertical: 24,
       ),
-      color: Colors.white,
+      color: Colors.black,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -84,10 +84,10 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: Colors.black,
+                  color: AppColors.primary,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.code_rounded, color: Colors.white, size: 20),
+                child: const Icon(Icons.code_rounded, color: Colors.black, size: 20),
               ),
               const SizedBox(width: 12),
               const Text(
@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w800,
-                  color: Colors.black,
+                  color: Colors.white,
                   letterSpacing: -0.5,
                 ),
               ),
@@ -108,11 +108,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 _NavLink("Mentors"),
                 _NavLink("Features"),
                 const SizedBox(width: 32),
-                const Icon(Icons.menu_rounded, color: Colors.black, size: 28),
+                const Icon(Icons.menu_rounded, color: Colors.white, size: 28),
               ],
             )
           else
-            const Icon(Icons.menu_rounded, color: Colors.black, size: 28),
+            const Icon(Icons.menu_rounded, color: Colors.white, size: 28),
         ],
       ),
     );
@@ -143,7 +143,7 @@ class _NavLinkState extends State<_NavLink> {
             Text(
               widget.title,
               style: TextStyle(
-                color: isHovered ? Colors.black : Colors.black54,
+                color: isHovered ? AppColors.primary : Colors.white70,
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),

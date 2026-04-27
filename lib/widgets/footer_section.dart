@@ -72,7 +72,7 @@ class FooterSection extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: AppColors.primary,
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.code_rounded, color: Colors.black, size: 20),
@@ -218,10 +218,10 @@ class _SocialIconState extends State<_SocialIcon> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isHovered ? AppColors.primary : AppColors.grey,
+          color: isHovered ? AppColors.primary : Colors.white12,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: FaIcon(widget.icon as FaIconData?, color: Colors.white, size: 20),
+        child: FaIcon(widget.icon as FaIconData?, color: isHovered ? Colors.black : Colors.white, size: 20),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'course_card.dart';
 import 'scroll_appear.dart';
+import '../theme.dart';
 
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
@@ -55,7 +56,7 @@ class CoursesSection extends StatelessWidget {
         horizontal: isMobile ? 24 : screenWidth * 0.1,
         vertical: 100,
       ),
-      color: Colors.white,
+      color: AppColors.background,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -67,7 +68,7 @@ class CoursesSection extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
-                    color: Colors.black,
+                    color: Colors.white,
                     letterSpacing: -0.5,
                   ),
                 ),

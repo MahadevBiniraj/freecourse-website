@@ -36,7 +36,7 @@ class FeatureSection extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      color: AppColors.primary,
+      color: AppColors.background,
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 24 : screenWidth * 0.15,
         vertical: 120,
@@ -75,7 +75,7 @@ class FeatureSection extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.white38,
+                color: AppColors.primary,
               ),
             ),
             const SizedBox(width: 32),

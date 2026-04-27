@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
-  static const Color background = Colors.white;
-  static const Color surface = Color(0xFFF8FAFC);
-  static const Color primary = Color(0xFF2D1B69); // Deep Purple from image
-  static const Color darkSection = Color(0xFF121212);
-  static const Color accent = Color(0xFF8B5CF6);
-  static const Color textPrimary = Color(0xFF0F172A);
-  static const Color textSecondary = Color(0xFF64748B);
-  static const Color grey = Color(0xFFE2E8F0);
+  static const Color background = Color(0xFF000000);
+  static const Color surface = Color(0xFF111111);
+  static const Color primary = Color(0xFF00FF85); // Neon Green
+  static const Color accent = Color(0xFF1A2B4C); // Deep Blue Glow
+  static const Color textPrimary = Color(0xFFFFFFFF);
+  static const Color textSecondary = Color(0xFFE0E0E0);
+  static const Color grey = Color(0xFF777777);
 
-  static const LinearGradient purpleGradient = LinearGradient(
-    colors: [primary, Color(0xFF4C1D95)],
+  static const LinearGradient neonGradient = LinearGradient(
+    colors: [primary, Color(0xFF00FFCC)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
-  static const LinearGradient darkGradient = LinearGradient(
-    colors: [Color(0xFF1E1E1E), Color(0xFF0F0F0F)],
+  static const LinearGradient glowGradient = LinearGradient(
+    colors: [Color(0xFF1A2B4C), Colors.transparent],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -35,8 +34,8 @@ class AppStyles {
 
   static List<BoxShadow> premiumShadow = [
     BoxShadow(
-      color: Colors.black.withValues(alpha: 0.1),
-      blurRadius: 30,
+      color: AppColors.primary.withValues(alpha: 0.2),
+      blurRadius: 40,
       offset: const Offset(0, 10),
     ),
   ];
@@ -45,20 +44,20 @@ class AppStyles {
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColors.background,
       primaryColor: AppColors.primary,
-      colorScheme: const ColorScheme.light(
+      colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
         secondary: AppColors.accent,
         surface: AppColors.surface,
       ),
-      textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme).copyWith(
+      textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).copyWith(
         displayLarge: GoogleFonts.inter(
           fontSize: 48,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w900,
           color: AppColors.textPrimary,
-          letterSpacing: -1,
+          letterSpacing: -1.5,
         ),
         displayMedium: GoogleFonts.inter(
           fontSize: 32,
@@ -77,23 +76,25 @@ class AppTheme {
         ),
       ),
       cardTheme: CardThemeData(
-        color: Colors.white,
+        color: AppColors.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
+          side: const BorderSide(color: Colors.white10),
         ),
         elevation: 0,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.white,
+          backgroundColor: AppColors.primary,
+          foregroundColor: Colors.black,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(100),
           ),
           textStyle: GoogleFonts.inter(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w900,
             fontSize: 16,
+            letterSpacing: -0.2,
           ),
           elevation: 0,
         ),

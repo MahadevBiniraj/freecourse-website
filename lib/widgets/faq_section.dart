@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'scroll_appear.dart';
+import '../theme.dart';
 
 class FAQSection extends StatelessWidget {
   const FAQSection({super.key});
@@ -23,7 +24,7 @@ class FAQSection extends StatelessWidget {
         horizontal: isMobile ? 24 : screenWidth * 0.2,
         vertical: 120,
       ),
-      color: Colors.white,
+      color: Colors.black,
       child: Column(
         children: [
           ScrollAppear(
@@ -33,7 +34,7 @@ class FAQSection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 40,
                 fontWeight: FontWeight.w900,
-                color: Colors.black,
+                color: Colors.white,
                 letterSpacing: -0.5,
               ),
             ),
@@ -66,7 +67,7 @@ class _FAQItemState extends State<_FAQItem> {
     return Container(
       margin: const EdgeInsets.only(bottom: 0),
       decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: Color(0xFFF1F5F9), width: 1)),
+        border: Border(bottom: BorderSide(color: Colors.white12, width: 1)),
       ),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
@@ -77,18 +78,18 @@ class _FAQItemState extends State<_FAQItem> {
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           trailing: Container(
             padding: const EdgeInsets.all(4),
             decoration: const BoxDecoration(
-              color: Colors.black,
+              color: AppColors.primary,
               shape: BoxShape.circle,
             ),
             child: const Icon(
               Icons.add,
-              color: Colors.white,
+              color: Colors.black,
               size: 18,
             ),
           ),
@@ -98,7 +99,7 @@ class _FAQItemState extends State<_FAQItem> {
               child: Text(
                 widget.answer,
                 style: const TextStyle(
-                  color: Colors.black54,
+                  color: Colors.white70,
                   fontSize: 16,
                   height: 1.6,
                 ),

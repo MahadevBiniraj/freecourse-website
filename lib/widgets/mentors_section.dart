@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'mentor_card.dart';
 import 'scroll_appear.dart';
+import '../theme.dart';
 
 class MentorsSection extends StatelessWidget {
   const MentorsSection({super.key});
@@ -27,7 +28,7 @@ class MentorsSection extends StatelessWidget {
         horizontal: isMobile ? 24 : screenWidth * 0.1,
         vertical: 120,
       ),
-      color: const Color(0xFF121212),
+      color: AppColors.background,
       child: Column(
         children: [
           ScrollAppear(

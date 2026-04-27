@@ -42,7 +42,7 @@ class WhyChooseUsSection extends StatelessWidget {
         horizontal: isMobile ? 24 : screenWidth * 0.1,
         vertical: 120,
       ),
-      color: Colors.white,
+      color: Colors.black,
       child: Column(
         children: [
           ScrollAppear(
@@ -54,7 +54,7 @@ class WhyChooseUsSection extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
-                    color: Colors.black,
+                    color: Colors.white,
                     letterSpacing: -0.5,
                   ),
                 ),
@@ -110,9 +110,9 @@ class _WhyCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFF111111),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.grey.shade100),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,7 +131,7 @@ class _WhyCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           const SizedBox(height: 12),
@@ -139,7 +139,7 @@ class _WhyCard extends StatelessWidget {
             desc,
             style: TextStyle(
               fontSize: 15,
-              color: Colors.grey.shade600,
+              color: Colors.white54,
               height: 1.5,
             ),
           ),

@@ -17,7 +17,7 @@ class PartnersSection extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 60),
-      color: AppColors.primary,
+      color: AppColors.surface,
       child: Column(
         children: [
           Text(
