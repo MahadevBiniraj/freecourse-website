@@ -13,14 +13,16 @@ class MentorsSection extends StatelessWidget {
     final isMobile = screenWidth < 800;
 
     final mentors = [
-      {'name': 'Alex Rivera', 'role': 'Senior Flutter Dev', 'image': 'https://randomuser.me/api/portraits/men/32.jpg'},
-      {'name': 'Sarah Chen', 'role': 'UI/UX Lead', 'image': 'https://randomuser.me/api/portraits/women/44.jpg'},
-      {'name': 'Marcus Thorne', 'role': 'Full-Stack Engineer', 'image': 'https://randomuser.me/api/portraits/men/46.jpg'},
-      {'name': 'Elena Rodriguez', 'role': 'Product Manager', 'image': 'https://randomuser.me/api/portraits/women/68.jpg'},
-      {'name': 'David Kim', 'role': 'AI Researcher', 'image': 'https://randomuser.me/api/portraits/men/22.jpg'},
-      {'name': 'Jasmine Lee', 'role': 'DevOps Lead', 'image': 'https://randomuser.me/api/portraits/women/33.jpg'},
-      {'name': 'Robert Wilson', 'role': 'Backend Expert', 'image': 'https://randomuser.me/api/portraits/men/55.jpg'},
-      {'name': 'Maria Garcia', 'role': 'Cybersecurity Lead', 'image': 'https://randomuser.me/api/portraits/women/11.jpg'},
+      {'name': 'Athul', 'role': 'Flutter Expert', 'image': 'assets/athul.png'},
+      {'name': 'Fahad', 'role': 'Web Developer', 'image': 'assets/fahad.png'},
+      {'name': 'Tinu', 'role': 'UI/UX Designer', 'image': 'assets/tinu.png'},
+      {'name': 'Malavika', 'role': 'Data Scientist', 'image': 'assets/malavika.png'},
+      {'name': 'Parvathy MR', 'role': 'Backend Engineer', 'image': 'assets/parvathymrimage.png'},
+      {'name': 'Mahadev', 'role': 'Full Stack Dev', 'image': 'assets/mahadev.png'},
+      {'name': 'Kaustubh Mokashi', 'role': 'DevOps Engineer', 'image': 'assets/Kaustubh Mokashi.png'},
+      {'name': 'Supriya Kasar', 'role': 'AI Researcher', 'image': 'assets/Supriya Kasar.png'},
+      {'name': 'Himanshu Chaudhary', 'role': 'Product Lead', 'image': 'assets/Himanshu Chaudhary.png'},
+      {'name': 'Archana Anil', 'role': 'Security Expert', 'image': 'assets/Archana Anil.png'},
     ];
 
     return Container(
@@ -48,26 +50,31 @@ class MentorsSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 80),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: isMobile ? 2 : 4,
-              crossAxisSpacing: 24,
-              mainAxisSpacing: 48,
-              childAspectRatio: isMobile ? 0.7 : 0.8,
-            ),
-            itemCount: mentors.length,
-            itemBuilder: (context, index) {
-              final mentor = mentors[index];
-              return ScrollAppear(
-                delay: (index * 150).ms,
-                scale: 0.9,
-                child: MentorCard(
-                  name: mentor['name']!,
-                  role: mentor['role']!,
-                  image: mentor['image']!,
-                ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final spacing = isMobile ? 16.0 : 24.0;
+              final crossAxisCount = isMobile ? 2 : 4;
+              final width = (constraints.maxWidth - (spacing * (crossAxisCount - 1))) / crossAxisCount;
+
+              return Wrap(
+                spacing: spacing,
+                runSpacing: 48,
+                alignment: WrapAlignment.center,
+                children: List.generate(mentors.length, (index) {
+                  final mentor = mentors[index];
+                  return ScrollAppear(
+                    delay: (index * 150).ms,
+                    scale: 0.9,
+                    child: SizedBox(
+                      width: width,
+                      child: MentorCard(
+                        name: mentor['name']!,
+                        role: mentor['role']!,
+                        image: mentor['image']!,
+                      ),
+                    ),
+                  );
+                }),
               );
             },
           ),

@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'course_card.dart';
 import 'scroll_appear.dart';
 import '../theme.dart';
+import '../screens/web_design_screen.dart';
 
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
@@ -18,6 +19,7 @@ class CoursesSection extends StatelessWidget {
         'desc': 'Master modern design principles and build stunning interfaces.',
         'image': 'assets/courses/ui_ux.png',
         'tag': 'Beginner Friendly',
+        'url': 'https://portfoliobuilders.in/courses/',
       },
       {
         'title': 'Full Stack Web Dev',
@@ -179,10 +181,14 @@ class CoursesSection extends StatelessWidget {
                       delay: (index * 150).ms,
                       begin: const Offset(0, 0.2),
                       child: CourseCard(
-                        title: course['title'] as String,
-                        desc: course['desc'] as String,
-                        imagePath: course['image'] as String,
-                        tag: course['tag'] as String,
+                        title: course['title']!,
+                        desc: course['desc']!,
+                        imagePath: course['image']!,
+                        tag: course['tag']!,
+                        url: course['url'],
+                        onTap: course['title'] == 'UI/UX Design' 
+                          ? () => Navigator.push(context, MaterialPageRoute(builder: (context) => const WebDesignScreen()))
+                          : null,
                       ),
                     );
                   },

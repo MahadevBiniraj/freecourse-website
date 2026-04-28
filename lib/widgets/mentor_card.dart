@@ -25,26 +25,36 @@ class _MentorCardState extends State<MentorCard> {
       onEnter: (_) => setState(() => isHovered = true),
       onExit: (_) => setState(() => isHovered = false),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
+          AspectRatio(
+            aspectRatio: 1,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 500),
               curve: Curves.easeOutQuart,
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
+                color: Colors.white.withValues(alpha: 0.05), // Subtle background
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
                 child: ColorFiltered(
                   colorFilter: const ColorFilter.mode(
                     Colors.grey,
                     BlendMode.saturation,
                   ),
-                  child: Image.network(
-                    widget.image,
-                    fit: BoxFit.cover,
-                  ),
+                  child: widget.image.startsWith('http')
+                      ? Image.network(
+                          widget.image,
+                          fit: BoxFit.cover,
+                          alignment: Alignment.topCenter,
+                        )
+                      : Image.asset(
+                          widget.image,
+                          fit: BoxFit.cover,
+                          alignment: Alignment.topCenter,
+                        ),
                 ),
               ),
             ),
@@ -52,6 +62,7 @@ class _MentorCardState extends State<MentorCard> {
           const SizedBox(height: 16),
           Text(
             widget.name,
+            textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -61,6 +72,7 @@ class _MentorCardState extends State<MentorCard> {
           const SizedBox(height: 4),
           Text(
             widget.role,
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 13,
               color: Colors.white.withValues(alpha: 0.5),

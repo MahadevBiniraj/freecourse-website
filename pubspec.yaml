@@ -38,6 +38,7 @@ dependencies:
   flutter_animate: ^4.5.2
   font_awesome_flutter: ^11.0.0
   visibility_detector: ^0.4.0+2
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/
     - assets/courses/
     - assets/why/
 
