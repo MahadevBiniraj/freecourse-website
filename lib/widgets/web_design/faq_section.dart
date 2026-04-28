@@ -26,7 +26,7 @@ class FAQSection extends StatelessWidget {
       },
       {
         'q': 'What is the course duration?',
-        'a': 'The bootcamp is designed to be completed in 12 weeks with a commitment of 10-15 hours per week. However, you have lifetime access to the materials so you can learn at your own pace.',
+        'a': 'The program is designed to be completed in 12 weeks with a commitment of 10-15 hours per week. However, you have lifetime access to the materials so you can learn at your own pace.',
       },
       {
         'q': 'Who is this course for?',

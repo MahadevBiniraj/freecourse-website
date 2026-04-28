@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../theme.dart';
 
-class AdvanceBootcampSection extends StatelessWidget {
-  const AdvanceBootcampSection({super.key});
+class AdvancePortfolioBuildersSection extends StatelessWidget {
+  const AdvancePortfolioBuildersSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class AdvanceBootcampSection extends StatelessWidget {
             child: Column(
               children: [
                 const Text(
-                  "Why Choose Our Bootcamp?",
+                  "Why Choose PortfolioBuilders?",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,

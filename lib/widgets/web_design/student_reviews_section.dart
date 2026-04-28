@@ -11,7 +11,7 @@ class StudentReviewsSection extends StatelessWidget {
     final isMobile = screenWidth < 800;
 
     final reviews = [
-      {'name': 'Sarah Jenkins', 'role': 'UX Designer @ Spotify', 'text': 'This bootcamp completely changed my career path. The mentors are top-notch and the curriculum is intensely practical.', 'image': 'assets/malavika.png'},
+      {'name': 'Sarah Jenkins', 'role': 'UX Designer @ Spotify', 'text': 'PortfolioBuilders completely changed my career path. The mentors are top-notch and the curriculum is intensely practical.', 'image': 'assets/malavika.png'},
       {'name': 'James Lin', 'role': 'Product Designer', 'text': 'I built a portfolio that landed me a job at a top tech company in just 4 months. The 1-on-1 feedback was game-changing.', 'image': 'assets/athul.png'},
       {'name': 'Elena Rodriguez', 'role': 'UI Lead', 'text': 'The global network is amazing. I have connections all over the world now. The web design principles taught are timeless.', 'image': 'assets/parvathymrimage.png'},
       {'name': 'David Kim', 'role': 'Freelance Designer', 'text': 'Highly recommend for anyone looking to break into web design. The lessons on Figma and No-code tools are extremely valuable.', 'image': 'assets/fahad.png'},
