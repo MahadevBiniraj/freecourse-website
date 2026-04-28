@@ -26,7 +26,8 @@ class CourseCard extends StatefulWidget {
   State<CourseCard> createState() => _CourseCardState();
 }
 
-class _CourseCardState extends State<CourseCard> with SingleTickerProviderStateMixin {
+class _CourseCardState extends State<CourseCard>
+    with SingleTickerProviderStateMixin {
   bool isHovered = false;
 
   Future<void> _launchUrl() async {
@@ -42,7 +43,9 @@ class _CourseCardState extends State<CourseCard> with SingleTickerProviderStateM
     return MouseRegion(
       onEnter: (_) => setState(() => isHovered = true),
       onExit: (_) => setState(() => isHovered = false),
-      cursor: (widget.url != null || widget.onTap != null) ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      cursor: (widget.url != null || widget.onTap != null)
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
       child: GestureDetector(
         onTap: widget.onTap ?? (widget.url != null ? _launchUrl : null),
         child: AnimatedScale(
@@ -122,13 +125,25 @@ class _CourseCardState extends State<CourseCard> with SingleTickerProviderStateM
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(100),
                                 child: BackdropFilter(
-                                  filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                                  filter: ImageFilter.blur(
+                                    sigmaX: 5,
+                                    sigmaY: 5,
+                                  ),
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 6,
+                                    ),
                                     decoration: BoxDecoration(
-                                      color: Colors.black.withValues(alpha: 0.6),
+                                      color: Colors.black.withValues(
+                                        alpha: 0.6,
+                                      ),
                                       borderRadius: BorderRadius.circular(100),
-                                      border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                                      border: Border.all(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.2,
+                                        ),
+                                      ),
                                     ),
                                     child: Text(
                                       widget.tag,
@@ -181,7 +196,9 @@ class _CourseCardState extends State<CourseCard> with SingleTickerProviderStateM
                                   Text(
                                     "Explore Course",
                                     style: TextStyle(
-                                      color: isHovered ? AppColors.primary : Colors.white70,
+                                      color: isHovered
+                                          ? AppColors.primary
+                                          : Colors.white70,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13,
                                     ),
@@ -189,11 +206,17 @@ class _CourseCardState extends State<CourseCard> with SingleTickerProviderStateM
                                   const SizedBox(width: 8),
                                   AnimatedContainer(
                                     duration: 300.ms,
-                                    transform: Matrix4.translationValues(isHovered ? 5 : 0, 0, 0),
+                                    transform: Matrix4.translationValues(
+                                      isHovered ? 5 : 0,
+                                      0,
+                                      0,
+                                    ),
                                     child: Icon(
                                       Icons.arrow_forward_rounded,
                                       size: 16,
-                                      color: isHovered ? AppColors.primary : Colors.white70,
+                                      color: isHovered
+                                          ? AppColors.primary
+                                          : Colors.white70,
                                     ),
                                   ),
                                 ],

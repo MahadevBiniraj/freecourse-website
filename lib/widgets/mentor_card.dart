@@ -35,7 +35,9 @@ class _MentorCardState extends State<MentorCard> {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                color: Colors.white.withValues(alpha: 0.05), // Subtle background
+                color: Colors.white.withValues(
+                  alpha: 0.05,
+                ), // Subtle background
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),

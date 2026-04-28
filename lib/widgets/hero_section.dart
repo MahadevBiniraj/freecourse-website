@@ -3,7 +3,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'premium_hero_background.dart';
 import '../theme.dart';
 
-
 class HeroSection extends StatelessWidget {
   final double scrollOffset;
   const HeroSection({super.key, required this.scrollOffset});
@@ -30,38 +29,44 @@ class HeroSection extends StatelessWidget {
             child: Column(
               children: [
                 // Top Badge
-                _buildBadge().animate().fadeIn(duration: 600.ms).slideY(begin: 0.2, end: 0),
+                _buildBadge()
+                    .animate()
+                    .fadeIn(duration: 600.ms)
+                    .slideY(begin: 0.2, end: 0),
                 const SizedBox(height: 32),
-                
+
                 // Headline
                 _buildHeadline(context, isMobile)
                     .animate()
                     .fadeIn(delay: 200.ms, duration: 800.ms)
                     .slideY(begin: 0.1, end: 0),
-                
+
                 const SizedBox(height: 32),
-                
+
                 // Subheadline
-                _buildSubheadline(isMobile)
-                    .animate()
-                    .fadeIn(delay: 400.ms, duration: 800.ms),
-                
+                _buildSubheadline(
+                  isMobile,
+                ).animate().fadeIn(delay: 400.ms, duration: 800.ms),
+
                 const SizedBox(height: 56),
-                
+
                 // CTAs
                 _buildCTAs(isMobile)
                     .animate()
                     .fadeIn(delay: 600.ms, duration: 800.ms)
-                    .scale(begin: const Offset(0.95, 0.95), curve: Curves.easeOutBack),
-                
+                    .scale(
+                      begin: const Offset(0.95, 0.95),
+                      curve: Curves.easeOutBack,
+                    ),
+
                 const SizedBox(height: 100),
-                
+
                 // Main Visual Stack
                 _buildVisualStack(screenWidth, isMobile),
               ],
             ),
           ),
-          
+
           // Floating Elements (Parallax)
           if (!isMobile) ...[
             _buildFloatingCard(
@@ -198,7 +203,10 @@ class HeroSection extends StatelessWidget {
           height: isMobile ? 300 : 550,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.1), width: 1.5),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.1),
+              width: 1.5,
+            ),
             boxShadow: [
               BoxShadow(
                 color: AppColors.primary.withValues(alpha: 0.05),
@@ -243,11 +251,32 @@ class HeroSection extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.redAccent, shape: BoxShape.circle)),
+                            Container(
+                              width: 12,
+                              height: 12,
+                              decoration: const BoxDecoration(
+                                color: Colors.redAccent,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
                             const SizedBox(width: 8),
-                            Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.amberAccent, shape: BoxShape.circle)),
+                            Container(
+                              width: 12,
+                              height: 12,
+                              decoration: const BoxDecoration(
+                                color: Colors.amberAccent,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
                             const SizedBox(width: 8),
-                            Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.greenAccent, shape: BoxShape.circle)),
+                            Container(
+                              width: 12,
+                              height: 12,
+                              decoration: const BoxDecoration(
+                                color: Colors.greenAccent,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 24),
@@ -261,8 +290,12 @@ class HeroSection extends StatelessWidget {
               ],
             ),
           ),
-        ).animate().scale(begin: const Offset(0.9, 0.9), duration: 1200.ms, curve: Curves.easeOutQuart),
-        
+        ).animate().scale(
+          begin: const Offset(0.9, 0.9),
+          duration: 1200.ms,
+          curve: Curves.easeOutQuart,
+        ),
+
         // Floating Overlays
         if (!isMobile) ...[
           Positioned(
@@ -274,17 +307,36 @@ class HeroSection extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Your Progress", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  const Text(
+                    "Your Progress",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("UI Design", style: TextStyle(color: Colors.white70, fontSize: 13)),
-                      Text("85%", style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+                      const Text(
+                        "UI Design",
+                        style: TextStyle(color: Colors.white70, fontSize: 13),
+                      ),
+                      Text(
+                        "85%",
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 8),
-                  LinearProgressIndicator(value: 0.85, backgroundColor: Colors.white10, valueColor: const AlwaysStoppedAnimation(AppColors.primary)),
+                  LinearProgressIndicator(
+                    value: 0.85,
+                    backgroundColor: Colors.white10,
+                    valueColor: const AlwaysStoppedAnimation(AppColors.primary),
+                  ),
                 ],
               ),
             ),
@@ -294,26 +346,41 @@ class HeroSection extends StatelessWidget {
     );
   }
 
-  Widget _buildFloatingCard({required double top, double? left, double? right, required Widget child}) {
+  Widget _buildFloatingCard({
+    required double top,
+    double? left,
+    double? right,
+    required Widget child,
+  }) {
     return Positioned(
       top: top,
       left: left,
       right: right,
-      child: child.animate(onPlay: (c) => c.repeat(reverse: true))
-          .moveY(begin: 0, end: 20, duration: 3.seconds, curve: Curves.easeInOut),
+      child: child
+          .animate(onPlay: (c) => c.repeat(reverse: true))
+          .moveY(
+            begin: 0,
+            end: 20,
+            duration: 3.seconds,
+            curve: Curves.easeInOut,
+          ),
     );
   }
 
   // Old background method removed as it's replaced by PremiumHeroBackground
 }
 
-
 class _GlassPanel extends StatelessWidget {
   final double width;
   final double? height;
   final Widget child;
   final EdgeInsets padding;
-  const _GlassPanel({required this.width, this.height, required this.child, this.padding = const EdgeInsets.all(16)});
+  const _GlassPanel({
+    required this.width,
+    this.height,
+    required this.child,
+    this.padding = const EdgeInsets.all(16),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -357,7 +424,12 @@ class _StatusCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final Color color;
-  const _StatusCard({required this.icon, required this.title, required this.subtitle, required this.color});
+  const _StatusCard({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -367,7 +439,11 @@ class _StatusCard extends StatelessWidget {
         color: const Color(0xFF111111),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 30, offset: const Offset(0, 15)),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 30,
+            offset: const Offset(0, 15),
+          ),
         ],
         border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
       ),
@@ -376,7 +452,10 @@ class _StatusCard extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: color.withValues(alpha: 0.1), shape: BoxShape.circle),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.1),
+              shape: BoxShape.circle,
+            ),
             child: Icon(icon, color: color, size: 20),
           ),
           const SizedBox(width: 16),
@@ -384,8 +463,18 @@ class _StatusCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.white)),
-              Text(subtitle, style: const TextStyle(color: Colors.white54, fontSize: 12)),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                subtitle,
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
+              ),
             ],
           ),
         ],
@@ -398,7 +487,11 @@ class _HoverButton extends StatefulWidget {
   final Widget child;
   final VoidCallback onPressed;
   final bool isPrimary;
-  const _HoverButton({required this.child, required this.onPressed, this.isPrimary = true});
+  const _HoverButton({
+    required this.child,
+    required this.onPressed,
+    this.isPrimary = true,
+  });
 
   @override
   State<_HoverButton> createState() => _HoverButtonState();
@@ -418,14 +511,22 @@ class _HoverButtonState extends State<_HoverButton> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            gradient: widget.isPrimary ? const LinearGradient(
-              colors: [Color(0xFF00FF85), Color(0xFF00FFCC)],
-            ) : null,
+            gradient: widget.isPrimary
+                ? const LinearGradient(
+                    colors: [Color(0xFF00FF85), Color(0xFF00FFCC)],
+                  )
+                : null,
             color: widget.isPrimary ? null : Colors.transparent,
             border: widget.isPrimary ? null : Border.all(color: Colors.white24),
-            boxShadow: isHovered && widget.isPrimary ? [
-              BoxShadow(color: const Color(0xFF00FF85).withValues(alpha: 0.3), blurRadius: 20, offset: const Offset(0, 10)),
-            ] : [],
+            boxShadow: isHovered && widget.isPrimary
+                ? [
+                    BoxShadow(
+                      color: const Color(0xFF00FF85).withValues(alpha: 0.3),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
+                    ),
+                  ]
+                : [],
           ),
           child: ElevatedButton(
             onPressed: widget.onPressed,
@@ -434,8 +535,14 @@ class _HoverButtonState extends State<_HoverButton> {
               foregroundColor: widget.isPrimary ? Colors.black : Colors.white,
               shadowColor: Colors.transparent,
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-              textStyle: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, letterSpacing: -0.2),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(100),
+              ),
+              textStyle: const TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 16,
+                letterSpacing: -0.2,
+              ),
             ),
             child: widget.child,
           ),

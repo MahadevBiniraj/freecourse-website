@@ -2,29 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
-  static const Color background = Color(0xFF000000);
+  static const Color background = Color(0xFF000000); // Back to Black
   static const Color surface = Color(0xFF111111);
   static const Color primary = Color(0xFF00FF85); // Neon Green
-  static const Color accent = Color(0xFF1A2B4C); // Deep Blue Glow
+  static const Color secondary = Color(0xFF00FFCC); // Teal Green
+  static const Color darkAccent = Color(0xFF0A1A1A); // Deep Dark Green/Black
   static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xFFE0E0E0);
-  static const Color grey = Color(0xFF777777);
+  static const Color textSecondary = Color(0xFFB0B0B0);
+  static const Color grey = Color(0xFF333333);
 
-  // Neon Palette
-  static const Color neonPurple = Color(0xFFBF5AF2);
-  static const Color neonBlue = Color(0xFF0A84FF);
-  static const Color neonTeal = Color(0xFF64D2FF);
-  static const Color neonYellow = Color(0xFFFFD60A);
-  static const Color neonPink = Color(0xFFFF375F);
-
-  static const LinearGradient neonGradient = LinearGradient(
-    colors: [primary, Color(0xFF00FFCC)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-
-  static const LinearGradient glowGradient = LinearGradient(
-    colors: [Color(0xFF1A2B4C), Colors.transparent],
+  static const LinearGradient primaryGradient = LinearGradient(
+    colors: [primary, secondary],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
@@ -33,7 +21,7 @@ class AppColors {
 class AppStyles {
   static BoxDecoration glassBox({
     double blur = 20,
-    double opacity = 0.05,
+    double opacity = 0.1,
     Color? borderColor,
     BorderRadius? borderRadius,
   }) {
@@ -41,32 +29,32 @@ class AppStyles {
       color: Colors.white.withValues(alpha: opacity),
       borderRadius: borderRadius ?? BorderRadius.circular(24),
       border: Border.all(
-        color: borderColor ?? Colors.white.withValues(alpha: 0.08),
+        color: borderColor ?? Colors.white.withValues(alpha: 0.1),
         width: 1,
       ),
     );
   }
 
-  static List<BoxShadow> neonGlow(Color color, {double opacity = 0.15}) {
-    return [
-      BoxShadow(
-        color: color.withValues(alpha: opacity),
-        blurRadius: 40,
-        spreadRadius: -10,
-        offset: const Offset(0, 10),
-      ),
-      BoxShadow(
-        color: color.withValues(alpha: opacity * 0.5),
-        blurRadius: 20,
-        spreadRadius: -5,
-      ),
-    ];
-  }
+  static List<BoxShadow> glowEffect = [
+    BoxShadow(
+      color: AppColors.primary.withValues(alpha: 0.3),
+      blurRadius: 30,
+      spreadRadius: 5,
+    )
+  ];
 
-  static List<BoxShadow> premiumShadow = [
+  static List<BoxShadow> hoverShadow = [
     BoxShadow(
       color: AppColors.primary.withValues(alpha: 0.2),
       blurRadius: 40,
+      offset: const Offset(0, 10),
+    ),
+  ];
+
+  static List<BoxShadow> premiumShadow = [
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.5),
+      blurRadius: 20,
       offset: const Offset(0, 10),
     ),
   ];
@@ -80,7 +68,7 @@ class AppTheme {
       primaryColor: AppColors.primary,
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
-        secondary: AppColors.accent,
+        secondary: AppColors.secondary,
         surface: AppColors.surface,
       ),
       textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme)

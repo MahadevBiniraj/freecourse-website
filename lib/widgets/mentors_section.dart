@@ -16,13 +16,41 @@ class MentorsSection extends StatelessWidget {
       {'name': 'Athul', 'role': 'Flutter Expert', 'image': 'assets/athul.png'},
       {'name': 'Fahad', 'role': 'Web Developer', 'image': 'assets/fahad.png'},
       {'name': 'Tinu', 'role': 'UI/UX Designer', 'image': 'assets/tinu.png'},
-      {'name': 'Malavika', 'role': 'Data Scientist', 'image': 'assets/malavika.png'},
-      {'name': 'Parvathy MR', 'role': 'Backend Engineer', 'image': 'assets/parvathymrimage.png'},
-      {'name': 'Mahadev', 'role': 'Full Stack Dev', 'image': 'assets/mahadev.png'},
-      {'name': 'Kaustubh Mokashi', 'role': 'DevOps Engineer', 'image': 'assets/Kaustubh Mokashi.png'},
-      {'name': 'Supriya Kasar', 'role': 'AI Researcher', 'image': 'assets/Supriya Kasar.png'},
-      {'name': 'Himanshu Chaudhary', 'role': 'Product Lead', 'image': 'assets/Himanshu Chaudhary.png'},
-      {'name': 'Archana Anil', 'role': 'Security Expert', 'image': 'assets/Archana Anil.png'},
+      {
+        'name': 'Malavika',
+        'role': 'Data Scientist',
+        'image': 'assets/malavika.png',
+      },
+      {
+        'name': 'Parvathy MR',
+        'role': 'Backend Engineer',
+        'image': 'assets/parvathymrimage.png',
+      },
+      {
+        'name': 'Mahadev',
+        'role': 'Full Stack Dev',
+        'image': 'assets/mahadev.png',
+      },
+      {
+        'name': 'Kaustubh Mokashi',
+        'role': 'DevOps Engineer',
+        'image': 'assets/Kaustubh Mokashi.png',
+      },
+      {
+        'name': 'Supriya Kasar',
+        'role': 'AI Researcher',
+        'image': 'assets/Supriya Kasar.png',
+      },
+      {
+        'name': 'Himanshu Chaudhary',
+        'role': 'Product Lead',
+        'image': 'assets/Himanshu Chaudhary.png',
+      },
+      {
+        'name': 'Archana Anil',
+        'role': 'Security Expert',
+        'image': 'assets/Archana Anil.png',
+      },
     ];
 
     return Container(
@@ -54,7 +82,9 @@ class MentorsSection extends StatelessWidget {
             builder: (context, constraints) {
               final spacing = isMobile ? 16.0 : 24.0;
               final crossAxisCount = isMobile ? 2 : 4;
-              final width = (constraints.maxWidth - (spacing * (crossAxisCount - 1))) / crossAxisCount;
+              final width =
+                  (constraints.maxWidth - (spacing * (crossAxisCount - 1))) /
+                  crossAxisCount;
 
               return Wrap(
                 spacing: spacing,

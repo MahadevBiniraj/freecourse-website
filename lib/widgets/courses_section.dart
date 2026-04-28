@@ -16,7 +16,8 @@ class CoursesSection extends StatelessWidget {
     final courses = [
       {
         'title': 'UI/UX Design',
-        'desc': 'Master modern design principles and build stunning interfaces.',
+        'desc':
+            'Master modern design principles and build stunning interfaces.',
         'image': 'assets/courses/ui_ux.png',
         'tag': 'Beginner Friendly',
         'url': 'https://portfoliobuilders.in/courses/',
@@ -55,9 +56,7 @@ class CoursesSection extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(
-        color: Colors.black,
-      ),
+      decoration: const BoxDecoration(color: Colors.black),
       child: Stack(
         children: [
           // 1. Premium Background
@@ -76,14 +75,12 @@ class CoursesSection extends StatelessWidget {
               ),
             ),
           ),
-          
+
           // 2. Faint Grid Pattern
           Positioned.fill(
             child: Opacity(
               opacity: 0.05,
-              child: CustomPaint(
-                painter: _GridPainter(),
-              ),
+              child: CustomPaint(painter: _GridPainter()),
             ),
           ),
 
@@ -98,7 +95,7 @@ class CoursesSection extends StatelessWidget {
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
                   colors: [
-                    AppColors.accent.withValues(alpha: 0.15),
+                    AppColors.darkAccent.withValues(alpha: 0.15),
                     Colors.transparent,
                   ],
                 ),
@@ -119,11 +116,16 @@ class CoursesSection extends StatelessWidget {
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.primary.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(100),
-                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+                          border: Border.all(
+                            color: AppColors.primary.withValues(alpha: 0.2),
+                          ),
                         ),
                         child: Text(
                           "LEARN FROM THE BEST",
@@ -186,9 +188,14 @@ class CoursesSection extends StatelessWidget {
                         imagePath: course['image']!,
                         tag: course['tag']!,
                         url: course['url'],
-                        onTap: course['title'] == 'UI/UX Design' 
-                          ? () => Navigator.push(context, MaterialPageRoute(builder: (context) => const WebDesignScreen()))
-                          : null,
+                        onTap: course['title'] == 'UI/UX Design'
+                            ? () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const WebDesignScreen(),
+                                ),
+                              )
+                            : null,
                       ),
                     );
                   },
@@ -196,7 +203,7 @@ class CoursesSection extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Noise Overlay
           Positioned.fill(
             child: Opacity(

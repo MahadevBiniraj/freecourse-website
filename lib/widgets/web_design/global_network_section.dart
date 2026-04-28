@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import '../../theme.dart';
 
 class GlobalNetworkSection extends StatelessWidget {
   const GlobalNetworkSection({super.key});
@@ -7,154 +8,171 @@ class GlobalNetworkSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 800;
+
+    final avatars = [
+      'assets/athul.png',
+      'assets/fahad.png',
+      'assets/tinu.png',
+      'assets/malavika.png',
+      'assets/parvathymrimage.png',
+      'assets/mahadev.png',
+      'assets/Kaustubh Mokashi.png',
+      'assets/Supriya Kasar.png',
+    ];
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 120),
-      color: const Color(0xFF8B0000), // Deep Red
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 24 : screenWidth * 0.1,
+        vertical: 120,
+      ),
+      color: AppColors.background,
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                const Text(
-                  "More than a Bootcamp -\nJoin a global network of skills.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 40,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: -1,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  "Our graduates work at the world's most innovative companies. Connect with a global community of designers and developers.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white70, fontSize: 18),
-                ),
-              ],
+          const Text(
+            "Join a Thriving Community",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.textPrimary,
+              fontSize: 40,
+              fontWeight: FontWeight.w900,
+              letterSpacing: -1,
             ),
-          ),
-          const SizedBox(height: 80),
-          // Network Visualization
-          Stack(
-            alignment: Alignment.center,
+          ).animate().fadeIn().slideY(begin: 0.2, end: 0),
+          const SizedBox(height: 16),
+          const Text(
+            "Connect with thousands of learners, mentors, and alumni worldwide.",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: AppColors.textSecondary, fontSize: 18),
+          ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2, end: 0),
+          
+          const SizedBox(height: 64),
+          
+          // Stats Row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Opacity(
-                opacity: 0.3,
-                child: Image.asset(
-                  'assets/world_map.png',
-                  width: screenWidth * 0.8,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              // We can add portraits here at specific offsets
-              _buildNetworkPortraits(screenWidth),
+              _buildStatCard("10,000+", "Active Students", isMobile),
+              SizedBox(width: isMobile ? 16 : 32),
+              _buildStatCard("500+", "Projects Built", isMobile),
+              SizedBox(width: isMobile ? 16 : 32),
+              _buildStatCard("95%", "Success Rate", isMobile),
             ],
-          ),
-          const SizedBox(height: 40),
-          // Row of square portraits
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildSquarePortrait('assets/athul.png'),
-                _buildSquarePortrait('assets/fahad.png'),
-                _buildSquarePortrait('assets/tinu.png'),
-                _buildSquarePortrait('assets/malavika.png'),
-                _buildSquarePortrait('assets/parvathymrimage.png'),
-                _buildSquarePortrait('assets/mahadev.png'),
-                _buildSquarePortrait('assets/Kaustubh Mokashi.png'),
-                _buildSquarePortrait('assets/Supriya Kasar.png'),
-                _buildSquarePortrait('assets/Himanshu Chaudhary.png'),
-                _buildSquarePortrait('assets/Archana Anil.png'),
-              ],
-            ),
-          ),
+          ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2, end: 0),
+
           const SizedBox(height: 80),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFFFD700), // Gold
-              foregroundColor: Colors.black,
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            ),
-            child: const Text("JOIN NETWORK", style: TextStyle(fontWeight: FontWeight.bold)),
+
+          // Avatars Grid/Scroll
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 16,
+            runSpacing: 16,
+            children: avatars.asMap().entries.map((e) => _HoverAvatar(
+              imagePath: e.value,
+              delay: e.key * 100,
+            )).toList(),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildNetworkPortraits(double screenWidth) {
-    // Simple placeholder for portraits on the map
-    return SizedBox(
-      width: screenWidth * 0.8,
-      height: 400,
-      child: Stack(
-        children: [
-          _PositionedPortrait(top: 100, left: 100, image: 'assets/athul.png'),
-          _PositionedPortrait(top: 150, right: 150, image: 'assets/fahad.png'),
-          _PositionedPortrait(bottom: 100, left: 200, image: 'assets/tinu.png'),
-          _PositionedPortrait(top: 50, center: true, image: 'assets/malavika.png'),
-          _PositionedPortrait(bottom: 50, right: 250, image: 'assets/mahadev.png'),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSquarePortrait(String imagePath) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      width: 60,
-      height: 60,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
+  Widget _buildStatCard(String stat, String label, bool isMobile) {
+    return Expanded(
+      child: Container(
+        padding: EdgeInsets.all(isMobile ? 16 : 32),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: Colors.white10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.5),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            )
+          ],
+        ),
+        child: Column(
+          children: [
+            Text(
+              stat,
+              style: TextStyle(
+                fontSize: isMobile ? 24 : 40,
+                fontWeight: FontWeight.w900,
+                color: AppColors.primary,
+                letterSpacing: -1,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: isMobile ? 12 : 16,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textSecondary,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
-    ).animate().fadeIn(delay: 800.ms).scale();
+    );
   }
 }
 
-class _PositionedPortrait extends StatelessWidget {
-  final double? top;
-  final double? bottom;
-  final double? left;
-  final double? right;
-  final bool center;
-  final String image;
+class _HoverAvatar extends StatefulWidget {
+  final String imagePath;
+  final int delay;
 
-  const _PositionedPortrait({this.top, this.bottom, this.left, this.right, this.center = false, required this.image});
+  const _HoverAvatar({required this.imagePath, required this.delay});
+
+  @override
+  State<_HoverAvatar> createState() => _HoverAvatarState();
+}
+
+class _HoverAvatarState extends State<_HoverAvatar> {
+  bool isHovered = false;
 
   @override
   Widget build(BuildContext context) {
-    Widget child = Container(
-      width: 40,
-      height: 40,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: Colors.white, width: 2),
-        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
-      ),
-    ).animate().scale(delay: 500.ms).fadeIn();
-
-    if (center) {
-      return Align(alignment: Alignment.center, child: child);
-    }
-
-    return Positioned(
-      top: top,
-      bottom: bottom,
-      left: left,
-      right: right,
-      child: child,
+    return MouseRegion(
+      onEnter: (_) => setState(() => isHovered = true),
+      onExit: (_) => setState(() => isHovered = false),
+      child: AnimatedScale(
+        scale: isHovered ? 1.1 : 1.0,
+        duration: const Duration(milliseconds: 200),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          width: 80,
+          height: 80,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: isHovered ? AppColors.primary : Colors.white,
+              width: 3,
+            ),
+            boxShadow: isHovered ? [
+              BoxShadow(
+                color: AppColors.primary.withValues(alpha: 0.3),
+                blurRadius: 15,
+                spreadRadius: 2,
+              )
+            ] : [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              )
+            ],
+            image: DecorationImage(
+              image: AssetImage(widget.imagePath),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ).animate().fadeIn(delay: widget.delay.ms).scale(),
     );
   }
 }

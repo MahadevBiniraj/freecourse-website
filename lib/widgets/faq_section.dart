@@ -12,11 +12,30 @@ class FAQSection extends StatelessWidget {
     final isMobile = screenWidth < 800;
 
     final faqs = [
-      {'q': 'What is PortfolioBuilders?', 'a': 'PortfolioBuilders is an online platform that provides high-quality tech education for free.'},
-      {'q': 'Is it free?', 'a': 'Yes, all our courses are 100% free with no hidden charges.'},
-      {'q': 'Who is it for?', 'a': 'Anyone looking to start or advance their career in tech, from beginners to experienced pros.'},
-      {'q': 'How long does it take?', 'a': 'Most courses range from 10 to 16 weeks depending on the intensity and topic.'},
-      {'q': 'Do I need prior experience?', 'a': 'No prior experience is required for our foundational courses. We start from the basics.'},
+      {
+        'q': 'What is PortfolioBuilders?',
+        'a':
+            'PortfolioBuilders is an online platform that provides high-quality tech education for free.',
+      },
+      {
+        'q': 'Is it free?',
+        'a': 'Yes, all our courses are 100% free with no hidden charges.',
+      },
+      {
+        'q': 'Who is it for?',
+        'a':
+            'Anyone looking to start or advance their career in tech, from beginners to experienced pros.',
+      },
+      {
+        'q': 'How long does it take?',
+        'a':
+            'Most courses range from 10 to 16 weeks depending on the intensity and topic.',
+      },
+      {
+        'q': 'Do I need prior experience?',
+        'a':
+            'No prior experience is required for our foundational courses. We start from the basics.',
+      },
     ];
 
     return Container(
@@ -40,10 +59,15 @@ class FAQSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 80),
-          ...faqs.asMap().entries.map((entry) => ScrollAppear(
-                delay: (entry.key * 100).ms,
-                child: _FAQItem(question: entry.value['q']!, answer: entry.value['a']!),
-              )),
+          ...faqs.asMap().entries.map(
+            (entry) => ScrollAppear(
+              delay: (entry.key * 100).ms,
+              child: _FAQItem(
+                question: entry.value['q']!,
+                answer: entry.value['a']!,
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -61,7 +85,6 @@ class _FAQItem extends StatefulWidget {
 }
 
 class _FAQItemState extends State<_FAQItem> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,11 +110,7 @@ class _FAQItemState extends State<_FAQItem> {
               color: AppColors.primary,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
-              Icons.add,
-              color: Colors.black,
-              size: 18,
-            ),
+            child: const Icon(Icons.add, color: Colors.black, size: 18),
           ),
           children: [
             Padding(

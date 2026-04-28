@@ -16,29 +16,33 @@ class WhyChooseUsSection extends StatelessWidget {
         'id': '1',
         'image': 'assets/why/expert_team.png',
         'title': 'Expert team',
-        'desc': 'Our team comprises individuals who are passionate about teaching and tech.',
-        'color': AppColors.neonPurple,
+        'desc':
+            'Our team comprises individuals who are passionate about teaching and tech.',
+        'color': AppColors.secondary,
       },
       {
         'id': '2',
         'image': 'assets/why/practical.png',
         'title': 'Practical',
-        'desc': 'We focus on practical hands-on learning by implementing concepts.',
-        'color': AppColors.neonTeal,
+        'desc':
+            'We focus on practical hands-on learning by implementing concepts.',
+        'color': AppColors.primary,
       },
       {
         'id': '3',
         'image': 'assets/why/results_driven.png',
         'title': 'Results-Driven',
-        'desc': 'We\'re committed to delivering measurable results for every student.',
-        'color': AppColors.neonBlue,
+        'desc':
+            'We\'re committed to delivering measurable results for every student.',
+        'color': AppColors.darkAccent,
       },
       {
         'id': '4',
         'image': 'assets/why/technology.png',
         'title': 'Technology',
-        'desc': 'We stay up-to-date with the latest technologies to provide solutions.',
-        'color': AppColors.neonYellow,
+        'desc':
+            'We stay up-to-date with the latest technologies to provide solutions.',
+        'color': AppColors.secondary,
       },
     ];
 
@@ -141,10 +145,7 @@ class _WhyCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(28),
       decoration: AppStyles.glassBox(
-        opacity: 0.05,
-      ).copyWith(
-        boxShadow: AppStyles.neonGlow(color, opacity: 0.05),
-      ),
+      ).copyWith(boxShadow: AppStyles.premiumShadow),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -184,18 +185,26 @@ class _WhyCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: image.startsWith('http')
-                  ? Image.network(
-                      image,
-                      fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const Icon(Icons.broken_image, color: Colors.white24, size: 48),
-                    )
-                  : Image.asset(
-                      image,
-                      fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const Icon(Icons.image_outlined, color: Colors.white24, size: 48),
-                    ),
+                    ? Image.network(
+                        image,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(
+                              Icons.broken_image,
+                              color: Colors.white24,
+                              size: 48,
+                            ),
+                      )
+                    : Image.asset(
+                        image,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(
+                              Icons.image_outlined,
+                              color: Colors.white24,
+                              size: 48,
+                            ),
+                      ),
               ),
             ),
           ),

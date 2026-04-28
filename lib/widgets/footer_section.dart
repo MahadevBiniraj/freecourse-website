@@ -75,7 +75,11 @@ class FooterSection extends StatelessWidget {
                 color: AppColors.primary,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.code_rounded, color: Colors.black, size: 20),
+              child: const Icon(
+                Icons.code_rounded,
+                color: Colors.black,
+                size: 20,
+              ),
             ),
             const SizedBox(width: 16),
             const Text(
@@ -102,9 +106,18 @@ class FooterSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        _LinkColumn(title: "Company", links: const ["About", "Careers", "Blogs"]),
-        _LinkColumn(title: "Categories", links: const ["Design", "Dev", "Marketing"]),
-        _LinkColumn(title: "Support", links: const ["Help", "Privacy", "Terms"]),
+        _LinkColumn(
+          title: "Company",
+          links: const ["About", "Careers", "Blogs"],
+        ),
+        _LinkColumn(
+          title: "Categories",
+          links: const ["Design", "Dev", "Marketing"],
+        ),
+        _LinkColumn(
+          title: "Support",
+          links: const ["Help", "Privacy", "Terms"],
+        ),
       ],
     );
   }
@@ -115,7 +128,11 @@ class FooterSection extends StatelessWidget {
       children: [
         const Text(
           "Connect With Us",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 16),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontSize: 16,
+          ),
         ),
         const SizedBox(height: 20),
         Row(
@@ -145,13 +162,20 @@ class _LinkColumn extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: 16, letterSpacing: 0.5),
+          style: const TextStyle(
+            fontWeight: FontWeight.w800,
+            color: Colors.white,
+            fontSize: 16,
+            letterSpacing: 0.5,
+          ),
         ),
         const SizedBox(height: 24),
-        ...links.map((link) => Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: _FooterLink(link),
-            )),
+        ...links.map(
+          (link) => Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: _FooterLink(link),
+          ),
+        ),
       ],
     );
   }
@@ -193,7 +217,10 @@ class _FooterSmallLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(color: AppColors.textSecondary.withValues(alpha: 0.5), fontSize: 13),
+      style: TextStyle(
+        color: AppColors.textSecondary.withValues(alpha: 0.5),
+        fontSize: 13,
+      ),
     );
   }
 }
@@ -221,7 +248,11 @@ class _SocialIconState extends State<_SocialIcon> {
           color: isHovered ? AppColors.primary : Colors.white12,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: FaIcon(widget.icon as FaIconData?, color: isHovered ? Colors.black : Colors.white, size: 20),
+        child: FaIcon(
+          widget.icon as FaIconData?,
+          color: isHovered ? Colors.black : Colors.white,
+          size: 20,
+        ),
       ),
     );
   }

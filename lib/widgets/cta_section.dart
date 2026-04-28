@@ -33,9 +33,7 @@ class CTASection extends StatelessWidget {
               ),
             ),
             Positioned.fill(
-              child: Container(
-                color: Colors.black.withValues(alpha: 0.6),
-              ),
+              child: Container(color: Colors.black.withValues(alpha: 0.6)),
             ),
             Center(
               child: Padding(
@@ -61,10 +59,7 @@ class CTASection extends StatelessWidget {
                       child: const Text(
                         "Start your journey today and join thousands of students.",
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white70,
-                        ),
+                        style: TextStyle(fontSize: 20, color: Colors.white70),
                       ),
                     ),
                     const SizedBox(height: 48),

@@ -64,9 +64,7 @@ class _PremiumHeroBackgroundState extends State<PremiumHeroBackground>
           bottom: widget.scrollOffset * 0.2,
           child: Opacity(
             opacity: 0.08,
-            child: CustomPaint(
-              painter: _GridPainter(),
-            ),
+            child: CustomPaint(painter: _GridPainter()),
           ),
         ),
 
@@ -82,7 +80,7 @@ class _PremiumHeroBackgroundState extends State<PremiumHeroBackground>
                   top: 50 + (math.sin(phase) * 60),
                   left: -150 + (math.cos(phase * 0.5) * 120),
                   size: 900,
-                  color: AppColors.accent.withValues(alpha: 0.35),
+                  color: AppColors.darkAccent.withValues(alpha: 0.35),
                 ),
                 // Another Blue Glow
                 _PositionedGlow(
@@ -96,9 +94,11 @@ class _PremiumHeroBackgroundState extends State<PremiumHeroBackground>
                   top: 300 + (math.cos(phase * 0.3) * 150),
                   left: screenWidth(context) * 0.1,
                   size: 700 + (math.sin(phase) * 50),
-                  color: AppColors.primary.withValues(alpha: 0.04 + (math.sin(phase) * 0.01)),
+                  color: AppColors.primary.withValues(
+                    alpha: 0.04 + (math.sin(phase) * 0.01),
+                  ),
                 ),
-                
+
                 // Neon Green Rim Lights
                 _RimLight(
                   alignment: Alignment.topLeft,
@@ -115,22 +115,29 @@ class _PremiumHeroBackgroundState extends State<PremiumHeroBackground>
 
         // 4. Spotlight behind Headline
         Center(
-          child: Container(
-            width: 1000,
-            height: 500,
-            decoration: BoxDecoration(
-              gradient: RadialGradient(
-                colors: [
-                  AppColors.accent.withValues(alpha: 0.25),
-                  AppColors.accent.withValues(alpha: 0.05),
-                  Colors.transparent,
-                ],
-                stops: const [0.0, 0.4, 1.0],
-                radius: 0.7,
-              ),
-            ),
-          ).animate(onPlay: (c) => c.repeat(reverse: true))
-           .scale(begin: const Offset(1, 1), end: const Offset(1.1, 1.1), duration: 4.seconds, curve: Curves.easeInOut),
+          child:
+              Container(
+                    width: 1000,
+                    height: 500,
+                    decoration: BoxDecoration(
+                      gradient: RadialGradient(
+                        colors: [
+                          AppColors.darkAccent.withValues(alpha: 0.25),
+                          AppColors.darkAccent.withValues(alpha: 0.05),
+                          Colors.transparent,
+                        ],
+                        stops: const [0.0, 0.4, 1.0],
+                        radius: 0.7,
+                      ),
+                    ),
+                  )
+                  .animate(onPlay: (c) => c.repeat(reverse: true))
+                  .scale(
+                    begin: const Offset(1, 1),
+                    end: const Offset(1.1, 1.1),
+                    duration: 4.seconds,
+                    curve: Curves.easeInOut,
+                  ),
         ),
 
         // 5. Light Streaks (Animated)
@@ -143,7 +150,9 @@ class _PremiumHeroBackgroundState extends State<PremiumHeroBackground>
         // 5b. Particle/Dust Effect
         Positioned.fill(
           child: CustomPaint(
-            painter: _ParticlePainter(animationValue: _animationController.value),
+            painter: _ParticlePainter(
+              animationValue: _animationController.value,
+            ),
           ),
         ),
 
@@ -213,9 +222,7 @@ class _PositionedGlow extends StatelessWidget {
         height: size,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          gradient: RadialGradient(
-            colors: [color, Colors.transparent],
-          ),
+          gradient: RadialGradient(colors: [color, Colors.transparent]),
         ),
       ),
     );
@@ -237,12 +244,12 @@ class _GridPainter extends CustomPainter {
     for (double i = 0; i < size.height; i += spacing) {
       canvas.drawLine(Offset(0, i), Offset(size.width, i), paint);
     }
-    
+
     // Draw dots at intersections
     final dotPaint = Paint()
       ..color = Colors.white.withValues(alpha: 0.2)
       ..strokeWidth = 1.0;
-      
+
     for (double i = 0; i < size.width; i += spacing) {
       for (double j = 0; j < size.height; j += spacing) {
         canvas.drawCircle(Offset(i, j), 0.8, dotPaint);
@@ -278,8 +285,13 @@ class _StreakPainter extends CustomPainter {
       path.moveTo(startX, -100);
       path.lineTo(startX + 800, size.height + 100);
     }
-    
-    canvas.drawPath(path, paint..style = PaintingStyle.stroke..strokeWidth = 1);
+
+    canvas.drawPath(
+      path,
+      paint
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1,
+    );
   }
 
   @override
@@ -303,7 +315,9 @@ class _RimLight extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: RadialGradient(
             colors: [color, Colors.transparent],
-            center: alignment == Alignment.topLeft ? const Alignment(-1, -1) : const Alignment(1, 1),
+            center: alignment == Alignment.topLeft
+                ? const Alignment(-1, -1)
+                : const Alignment(1, 1),
             radius: 1.0,
           ),
         ),
@@ -317,22 +331,27 @@ class _ParticlePainter extends CustomPainter {
   final List<Offset> particles;
 
   _ParticlePainter({required this.animationValue})
-      : particles = List.generate(
-          30,
-          (index) => Offset(
-            math.Random(index).nextDouble(),
-            math.Random(index + 100).nextDouble(),
-          ),
-        );
+    : particles = List.generate(
+        30,
+        (index) => Offset(
+          math.Random(index).nextDouble(),
+          math.Random(index + 100).nextDouble(),
+        ),
+      );
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..color = Colors.white.withValues(alpha: 0.1);
 
     for (var particle in particles) {
-      double x = (particle.dx * size.width + (math.sin(animationValue * 2 * math.pi + particle.dx * 10) * 20)) % size.width;
-      double y = (particle.dy * size.height - (animationValue * 50)) % size.height;
-      
+      double x =
+          (particle.dx * size.width +
+              (math.sin(animationValue * 2 * math.pi + particle.dx * 10) *
+                  20)) %
+          size.width;
+      double y =
+          (particle.dy * size.height - (animationValue * 50)) % size.height;
+
       canvas.drawCircle(Offset(x, y), 0.8, paint);
     }
   }

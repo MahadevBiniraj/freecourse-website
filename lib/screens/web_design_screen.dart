@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme.dart';
 import '../widgets/web_design/web_hero_section.dart';
 import '../widgets/web_design/global_network_section.dart';
 import '../widgets/web_design/ready_for_game_section.dart';
@@ -15,19 +16,19 @@ class WebDesignScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.background,
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            const WebHeroSection(),
-            const GlobalNetworkSection(),
-            const ReadyForGameSection(),
-            const CurriculumSection(),
-            const LiveMentoringSection(),
-            const AdvanceBootcampSection(),
-            const StudentReviewsSection(),
-            const FAQSection(),
-            const FooterSection(),
+          children: const [
+            WebHeroSection(),
+            GlobalNetworkSection(),
+            ReadyForGameSection(),
+            CurriculumSection(),
+            LiveMentoringSection(),
+            AdvanceBootcampSection(),
+            StudentReviewsSection(),
+            FAQSection(),
+            FooterSection(),
           ],
         ),
       ),

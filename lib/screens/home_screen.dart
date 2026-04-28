@@ -87,7 +87,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: AppColors.primary,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.code_rounded, color: Colors.black, size: 20),
+                child: const Icon(
+                  Icons.code_rounded,
+                  color: Colors.black,
+                  size: 20,
+                ),
               ),
               const SizedBox(width: 12),
               const Text(
