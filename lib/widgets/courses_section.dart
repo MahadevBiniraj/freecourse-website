@@ -9,6 +9,7 @@ import '../web_course/web_course_landing_page.dart';
 import '../game_course/game_course_landing_page.dart';
 
 import '../python_course/python_course_landing_page.dart';
+import '../product_course/product_course_landing_page.dart';
 
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
@@ -51,8 +52,8 @@ class CoursesSection extends StatelessWidget {
         'tag': 'Advanced',
       },
       {
-        'title': 'Project Management',
-        'desc': 'Lead teams and deliver successful tech products.',
+        'title': 'Product Management',
+        'desc': 'Define the vision and lead the development of successful products.',
         'image': 'assets/courses/project_management.png',
         'tag': 'Career-focused',
       },
@@ -229,6 +230,13 @@ class CoursesSection extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const PythonCourseLandingPage(),
+                              ),
+                            );
+                          } else if (course['title'] == 'Product Management') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ProductCourseLandingPage(),
                               ),
                             );
                           }
