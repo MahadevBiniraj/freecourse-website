@@ -4,6 +4,7 @@ import 'course_card.dart';
 import 'scroll_appear.dart';
 import '../theme.dart';
 import '../screens/web_design_screen.dart';
+import '../flutter_course/flutter_course_landing_page.dart';
 
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
@@ -188,14 +189,23 @@ class CoursesSection extends StatelessWidget {
                         imagePath: course['image']!,
                         tag: course['tag']!,
                         url: course['url'],
-                        onTap: course['title'] == 'UI/UX Design'
-                            ? () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const WebDesignScreen(),
-                                ),
-                              )
-                            : null,
+                        onTap: () {
+                          if (course['title'] == 'UI/UX Design') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const WebDesignScreen(),
+                              ),
+                            );
+                          } else if (course['title'] == 'Mobile App Dev (Flutter)') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const FlutterCourseLandingPage(),
+                              ),
+                            );
+                          }
+                        },
                       ),
                     );
                   },
