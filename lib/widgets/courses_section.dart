@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'course_card.dart';
-import 'scroll_appear.dart';
+import '../widgets/scroll_appear.dart';
+import '../widgets/course_card.dart';
 import '../theme.dart';
 import '../screens/web_design_screen.dart';
 import '../flutter_course/flutter_course_landing_page.dart';
 import '../web_course/web_course_landing_page.dart';
+import '../game_course/game_course_landing_page.dart';
 
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
@@ -18,8 +19,7 @@ class CoursesSection extends StatelessWidget {
     final courses = [
       {
         'title': 'UI/UX Design',
-        'desc':
-            'Master modern design principles and build stunning interfaces.',
+        'desc': 'Master modern design principles and build stunning interfaces.',
         'image': 'assets/courses/ui_ux.png',
         'tag': 'Beginner Friendly',
         'url': 'https://portfoliobuilders.in/courses/',
@@ -37,8 +37,8 @@ class CoursesSection extends StatelessWidget {
         'tag': 'Job-ready',
       },
       {
-        'title': 'Game Development',
-        'desc': 'Bring your imagination to life with interactive mechanics.',
+        'title': 'Game Dev (Unity & C#)',
+        'desc': 'Build immersive 2D and 3D games with Unity engine.',
         'image': 'assets/courses/game_dev.png',
         'tag': 'Project-based',
       },
@@ -58,20 +58,24 @@ class CoursesSection extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      decoration: const BoxDecoration(color: Colors.black),
+      decoration: const BoxDecoration(
+        color: AppColors.background,
+      ),
       child: Stack(
         children: [
-          // 1. Premium Background
-          Positioned.fill(
+          // 1. Decorative Glows
+          Positioned(
+            top: -300,
+            left: -300,
             child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+              width: 800,
+              height: 800,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
                   colors: [
-                    Color(0xFF000000),
-                    Color(0xFF020B1A),
-                    Color(0xFF000000),
+                    AppColors.primary.withValues(alpha: 0.1),
+                    Colors.transparent,
                   ],
                 ),
               ),
@@ -129,7 +133,7 @@ class CoursesSection extends StatelessWidget {
                             color: AppColors.primary.withValues(alpha: 0.2),
                           ),
                         ),
-                        child: Text(
+                        child: const Text(
                           "LEARN FROM THE BEST",
                           style: TextStyle(
                             color: AppColors.primary,
@@ -154,13 +158,12 @@ class CoursesSection extends StatelessWidget {
                       const SizedBox(height: 16),
                       SizedBox(
                         width: 700,
-                        child: Text(
+                        child: const Text(
                           "Choose your path and start building real-world skills today. Our curriculum is designed by industry experts to help you break into tech.",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: isMobile ? 16 : 20,
-                            color: Colors.white.withValues(alpha: 0.5),
-                            height: 1.6,
+                            color: AppColors.textSecondary,
+                            fontSize: 18,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -212,6 +215,13 @@ class CoursesSection extends StatelessWidget {
                                 builder: (context) => const WebCourseLandingPage(),
                               ),
                             );
+                          } else if (course['title'] == 'Game Dev (Unity & C#)') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const GameCourseLandingPage(),
+                              ),
+                            );
                           }
                         },
                       ),
@@ -225,11 +235,10 @@ class CoursesSection extends StatelessWidget {
           // Noise Overlay
           Positioned.fill(
             child: Opacity(
-              opacity: 0.04,
-              child: Image.network(
-                'https://grainy-gradients.vercel.app/noise.svg',
+              opacity: 0.02,
+              child: Image.asset(
+                'assets/noise.png',
                 repeat: ImageRepeat.repeat,
-                fit: BoxFit.none,
               ),
             ),
           ),
@@ -246,16 +255,16 @@ class _GridPainter extends CustomPainter {
       ..color = Colors.white.withValues(alpha: 0.1)
       ..strokeWidth = 0.5;
 
-    const spacing = 80.0;
+    const spacing = 40.0;
 
-    for (double i = 0; i < size.width; i += spacing) {
+    for (var i = 0.0; i < size.width; i += spacing) {
       canvas.drawLine(Offset(i, 0), Offset(i, size.height), paint);
     }
-    for (double i = 0; i < size.height; i += spacing) {
+    for (var i = 0.0; i < size.height; i += spacing) {
       canvas.drawLine(Offset(0, i), Offset(size.width, i), paint);
     }
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
