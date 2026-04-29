@@ -8,6 +8,8 @@ import '../flutter_course/flutter_course_landing_page.dart';
 import '../web_course/web_course_landing_page.dart';
 import '../game_course/game_course_landing_page.dart';
 
+import '../python_course/python_course_landing_page.dart';
+
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
 
@@ -220,6 +222,13 @@ class CoursesSection extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const GameCourseLandingPage(),
+                              ),
+                            );
+                          } else if (course['title'] == 'Python Django') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const PythonCourseLandingPage(),
                               ),
                             );
                           }
