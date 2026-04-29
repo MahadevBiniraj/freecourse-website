@@ -54,7 +54,10 @@ class _WebCourseLandingPageState extends State<WebCourseLandingPage> {
                   WebCurriculum(key: curriculumKey),
                   ProjectsShowcase(key: projectsKey),
                   const WebEnrollCTA(),
-                  const Footer(), // Footer will inherit the dark theme
+                  const Footer(
+                    brandName: "Full Stack Web Development Free Course",
+                    description: "Master the MERN stack and build production-ready web applications. Join our community of web developers today.",
+                  ),
                 ],
               ),
             ),

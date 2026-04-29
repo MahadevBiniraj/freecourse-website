@@ -2,16 +2,26 @@ import 'package:flutter/material.dart';
 import '../theme.dart';
 
 class Footer extends StatelessWidget {
-  const Footer({super.key});
+  final String? brandName;
+  final String? description;
+
+  const Footer({
+    super.key,
+    this.brandName,
+    this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 900;
+    
+    final displayBrand = brandName ?? "Flutter Free Course";
+    final displayDesc = description ?? "Empowering developers to build beautiful apps for any screen. Join our community and master your craft today.";
 
     return Container(
       width: double.infinity,
-      color: FlutterCourseColors.background,
+      color: Colors.black, // Use absolute black for consistency
       padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : screenWidth * 0.1, vertical: 100),
       child: Column(
         children: [
@@ -26,10 +36,10 @@ class Footer extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Flutter Free Course", style: FlutterCourseFonts.body(24, weight: FontWeight.w800, color: Colors.white)),
+                    Text(displayBrand, style: FlutterCourseFonts.body(24, weight: FontWeight.w800, color: Colors.white)),
                     const SizedBox(height: 24),
                     Text(
-                      "Empowering developers to build beautiful apps for any screen. Join our community and master Flutter today.",
+                      displayDesc,
                       style: FlutterCourseFonts.body(16, color: Colors.white.withValues(alpha: 0.5), height: 1.6),
                     ),
                   ],
@@ -73,7 +83,7 @@ class Footer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("© 2024 Flutter Free Course. All rights reserved.", style: FlutterCourseFonts.body(14, color: Colors.white.withValues(alpha: 0.3))),
+              Text("© 2024 $displayBrand. All rights reserved.", style: FlutterCourseFonts.body(14, color: Colors.white.withValues(alpha: 0.3))),
               if (!isMobile)
                 Row(
                   children: [

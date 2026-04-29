@@ -54,7 +54,10 @@ class _GameCourseLandingPageState extends State<GameCourseLandingPage> {
                   GameCurriculum(key: curriculumKey),
                   GameProjectShowcase(key: projectsKey),
                   const GameEnrollCTA(),
-                  const Footer(),
+                  const Footer(
+                    brandName: "Game Development Free Course",
+                    description: "Learn to build professional games with Unity and C#. Join our indie dev community and start creating today.",
+                  ),
                 ],
               ),
             ),
