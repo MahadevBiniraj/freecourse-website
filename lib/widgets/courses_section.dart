@@ -5,6 +5,7 @@ import 'scroll_appear.dart';
 import '../theme.dart';
 import '../screens/web_design_screen.dart';
 import '../flutter_course/flutter_course_landing_page.dart';
+import '../web_course/web_course_landing_page.dart';
 
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
@@ -202,6 +203,13 @@ class CoursesSection extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const FlutterCourseLandingPage(),
+                              ),
+                            );
+                          } else if (course['title'] == 'Full Stack Web Dev') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const WebCourseLandingPage(),
                               ),
                             );
                           }
