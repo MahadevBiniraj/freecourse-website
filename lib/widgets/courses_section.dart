@@ -12,6 +12,7 @@ import '../python_course/python_course_landing_page.dart';
 import '../product_course/product_course_landing_page.dart';
 import '../digital_marketing_course/digital_marketing_course_landing_page.dart';
 import '../ai_ml_course/ai_ml_course_landing_page.dart';
+import '../blockchain_course/blockchain_course_landing_page.dart';
 
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
@@ -271,6 +272,13 @@ class CoursesSection extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const AIMLCourseLandingPage(),
+                              ),
+                            );
+                          } else if (course['title'] == 'Blockchain & Web3') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const BlockchainCourseLandingPage(),
                               ),
                             );
                           }
