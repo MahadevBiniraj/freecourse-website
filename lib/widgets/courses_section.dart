@@ -10,6 +10,7 @@ import '../game_course/game_course_landing_page.dart';
 
 import '../python_course/python_course_landing_page.dart';
 import '../product_course/product_course_landing_page.dart';
+import '../digital_marketing_course/digital_marketing_course_landing_page.dart';
 
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
@@ -56,6 +57,24 @@ class CoursesSection extends StatelessWidget {
         'desc': 'Define the vision and lead the development of successful products.',
         'image': 'assets/courses/project_management.png',
         'tag': 'Career-focused',
+      },
+      {
+        'title': 'Digital Marketing',
+        'desc': 'Master SEO, social media marketing, and data-driven advertising strategies.',
+        'image': 'assets/courses/digital_marketing.png',
+        'tag': 'Trending',
+      },
+      {
+        'title': 'AI/ML Mastery',
+        'desc': 'Build intelligent systems with Python, TensorFlow, and PyTorch.',
+        'image': 'assets/courses/ai_ml.png',
+        'tag': 'Trending',
+      },
+      {
+        'title': 'Blockchain & Web3',
+        'desc': 'Master smart contracts, Ethereum, and decentralized apps.',
+        'image': 'assets/courses/blockchain.png',
+        'tag': 'Advanced',
       },
     ];
 
@@ -237,6 +256,13 @@ class CoursesSection extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const ProductCourseLandingPage(),
+                              ),
+                            );
+                          } else if (course['title'] == 'Digital Marketing') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DigitalMarketingCourseLandingPage(),
                               ),
                             );
                           }
