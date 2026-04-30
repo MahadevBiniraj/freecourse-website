@@ -11,6 +11,7 @@ import '../game_course/game_course_landing_page.dart';
 import '../python_course/python_course_landing_page.dart';
 import '../product_course/product_course_landing_page.dart';
 import '../digital_marketing_course/digital_marketing_course_landing_page.dart';
+import '../ai_ml_course/ai_ml_course_landing_page.dart';
 
 class CoursesSection extends StatelessWidget {
   const CoursesSection({super.key});
@@ -263,6 +264,13 @@ class CoursesSection extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const DigitalMarketingCourseLandingPage(),
+                              ),
+                            );
+                          } else if (course['title'] == 'AI/ML Mastery') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AIMLCourseLandingPage(),
                               ),
                             );
                           }
